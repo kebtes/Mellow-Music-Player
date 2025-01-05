@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Mellow_Music_Player.UI;
+using Mellow_Music_Player.Source.Services;
+using System.Diagnostics;
+using Mellow_Music_Player.Source.Models;
 
 namespace Mellow_Music_Player
 {
@@ -14,9 +19,21 @@ namespace Mellow_Music_Player
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Main());
+            FileService fs = new FileService();
+            
+            List<Song> songs = fs.getSongs();
+            string[] audioFiles = fs.getAudioFiles();
+
+
+            Console.WriteLine(audioFiles.Length);
+            foreach (Song file in fs.getSongs())
+            {
+                Console.WriteLine(file.Artists[0]);
+            }
+
         }
     }
 }
