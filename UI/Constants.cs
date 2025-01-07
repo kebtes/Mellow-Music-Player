@@ -25,7 +25,15 @@ namespace Mellow_Music_Player.UI
         public static string PlaylistSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Playlist-Selected.png");
         public static string FeedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Feed.png");
         public static string FeedSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Feed-Selected.png");
+        public static string PlayButtonSmallIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PlayButtonSmall.png");
+        public static string PlayButtonSmallSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PlayButtonSmall-Selected.png");
+        public static string PlayButtonIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PlayButton.png");
+        public static string PlayButtonSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PlayButton-Selected.png");
+        public static string PauseButtonIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PauseButton.png");
+        public static string PauseButtonSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PauseButton-Selected.png");
         
+        public static string ProjectFont = "Geist";
+
 
     }
 }
