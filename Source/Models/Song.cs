@@ -1,20 +1,112 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Mellow_Music_Player.Source.Models
+public class Song : INotifyPropertyChanged
 {
-    internal class Song
+    private string title;
+    private string[] artists;
+    private string album;
+    private string[] genres;
+    private TimeSpan duration;
+    private string filePath;
+    private Image albumArt;
+    
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public string Title
     {
-        public string Title { get; set; }
-        public string[] Artists { get; set; }
-        public string Album { get; set; }
-        public string[] Genres { get; set; }
-        public TimeSpan Duration { get; set; }
-        public string FilePath { get; set; }
-        public Image AlbumArt { get; set; }
+        get => title;
+        set
+        {
+            if (title != value)
+            {
+                title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
+    }
+
+    public string[] Artists
+    {
+        get => artists;
+        set
+        {
+            if (artists != value)
+            {
+                artists = value;
+                OnPropertyChanged(nameof(Artists));
+            }
+        }
+    }
+
+    public string Album
+    {
+        get => album;
+        set
+        {
+            if (album != value)
+            {
+                album = value;
+                OnPropertyChanged(nameof(Album));
+            }
+        }
+    }
+
+    public string[] Genres
+    {
+        get => genres;
+        set
+        {
+            if (genres != value)
+            {
+                genres = value;
+                OnPropertyChanged(nameof(Genres));
+            }
+        }
+    }
+
+    public TimeSpan Duration
+    {
+        get => duration;
+        set
+        {
+            if (duration != value)
+            {
+                duration = value;
+                OnPropertyChanged(nameof(Duration));
+            }
+        }
+    }
+
+    public string FilePath
+    {
+        get => filePath;
+        set
+        {
+            if (filePath != value)
+            {
+                filePath = value;
+                OnPropertyChanged(nameof(FilePath));
+            }
+        }
+    }
+
+    public Image AlbumArt
+    {
+        get => albumArt;
+        set
+        {
+            if (albumArt != value)
+            {
+                albumArt = value;
+                OnPropertyChanged(nameof(AlbumArt));
+            }
+        }
+    }
+
+    protected void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
