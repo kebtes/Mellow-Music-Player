@@ -1,4 +1,6 @@
-﻿namespace Mellow_Music_Player.UI
+﻿using System.Windows.Forms;
+
+namespace Mellow_Music_Player.UI
 {
     partial class panelFeed
     {
@@ -42,11 +44,11 @@
             // labelMusic
             // 
             this.labelMusic.AutoSize = true;
-            this.labelMusic.Font = new System.Drawing.Font("Geist", 20F, System.Drawing.FontStyle.Bold);
+            this.labelMusic.Font = new System.Drawing.Font("Geist", 18F, System.Drawing.FontStyle.Bold);
             this.labelMusic.ForeColor = System.Drawing.Color.White;
             this.labelMusic.Location = new System.Drawing.Point(12, 99);
             this.labelMusic.Name = "labelMusic";
-            this.labelMusic.Size = new System.Drawing.Size(138, 43);
+            this.labelMusic.Size = new System.Drawing.Size(121, 38);
             this.labelMusic.TabIndex = 0;
             this.labelMusic.Text = "Musics";
             this.labelMusic.Click += new System.EventHandler(this.labelMusic_Click);
@@ -74,8 +76,9 @@
             // 
             // buttonDirectory
             // 
+            this.buttonDirectory.FlatAppearance.BorderSize = 0;
             this.buttonDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDirectory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
+            this.buttonDirectory.ForeColor = System.Drawing.Color.White;
             this.buttonDirectory.Image = ((System.Drawing.Image)(resources.GetObject("buttonDirectory.Image")));
             this.buttonDirectory.Location = new System.Drawing.Point(814, 116);
             this.buttonDirectory.Name = "buttonDirectory";
@@ -88,7 +91,7 @@
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel2.Controls.Add(this.searchBoxTextArea);
-            this.panel2.Location = new System.Drawing.Point(20, 48);
+            this.panel2.Location = new System.Drawing.Point(19, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(368, 37);
             this.panel2.TabIndex = 4;
@@ -99,7 +102,7 @@
             this.searchBoxTextArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.searchBoxTextArea.Font = new System.Drawing.Font("Geist", 8.25F);
             this.searchBoxTextArea.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.searchBoxTextArea.Location = new System.Drawing.Point(57, 11);
+            this.searchBoxTextArea.Location = new System.Drawing.Point(54, 9);
             this.searchBoxTextArea.MaxLength = 500;
             this.searchBoxTextArea.Name = "searchBoxTextArea";
             this.searchBoxTextArea.Size = new System.Drawing.Size(273, 18);
