@@ -9,7 +9,7 @@ namespace Mellow_Music_Player.Source
 {
     public static class ScaleImage
     {
-        public static Image scaleImage(Image originalImage, int width = 45, int height = 45)
+        public static Image Scale(Image originalImage, int width = 45, int height = 45)
         {
             Bitmap scaledBitmap = new Bitmap(width, height);
 
