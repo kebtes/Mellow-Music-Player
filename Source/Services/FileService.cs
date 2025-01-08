@@ -5,24 +5,25 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Mellow_Music_Player.Source;
-using Mellow_Music_Player.Source.Models;
 using System.Drawing;
 using TagLib;
 
+using Mellow_Music_Player.Source;
+using Mellow_Music_Player.Source.Models;
+using Mellow_Music_Player.Source.Services.Database_Services;
+
+
 namespace Mellow_Music_Player.Source.Services
 {
-    internal class FileService
+    public static class FileService
     {
-        private string directory;
-        private string[] audioFiles;
-        private List<Song> songs;
+        private static string directory = Settings.songsDirectory;
+        private static List<Song> songs = new List<Song>();
 
-        public FileService() 
-        {
-            songs = new List<Song>();
-            directory = Settings.songsDirectory;
-            
+        private static string[] audioFiles;
+
+        public static void Refresh() 
+        {   
             try
             {
                 audioFiles = Directory.GetFiles(directory, "*.mp3", SearchOption.TopDirectoryOnly);
@@ -58,6 +59,8 @@ namespace Mellow_Music_Player.Source.Services
 
                         song.FilePath = file;
                         songs.Add(song);
+
+                        DatabaseService.AddSongToTable(song);
                     }
 
                 } 
@@ -71,14 +74,31 @@ namespace Mellow_Music_Player.Source.Services
 
         }
 
-        public string[] getAudioFiles()
+        public static string[] getAudioFiles()
         {
             return audioFiles;
         }
 
-        public List<Song> getSongs()
+        public static List<Song> getSongs()
         {
             return songs;
+        }
+
+        public static Image GetAlbumArt(string path)
+        {
+            using (TagLib.File tagFile = TagLib.File.Create(path))
+            {
+                if (tagFile.Tag.Pictures.Length > 0)
+                {
+                    var bin = tagFile.Tag.Pictures[0].Data.Data;
+                    using (MemoryStream ms = new MemoryStream(bin))
+                    {
+                        return Image.FromStream(ms); ;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }
