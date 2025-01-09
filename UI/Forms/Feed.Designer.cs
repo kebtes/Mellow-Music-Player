@@ -55,7 +55,6 @@ namespace Mellow_Music_Player.UI
             this.labelMusic.Size = new System.Drawing.Size(121, 38);
             this.labelMusic.TabIndex = 0;
             this.labelMusic.Text = "Musics";
-            this.labelMusic.Click += new System.EventHandler(this.labelMusic_Click);
             // 
             // panel1
             // 
@@ -64,7 +63,6 @@ namespace Mellow_Music_Player.UI
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(950, 2);
             this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // buttonRefresh
             // 
@@ -159,7 +157,6 @@ namespace Mellow_Music_Player.UI
             this.Controls.Add(this.labelMusic);
             this.Name = "panelFeed";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.panelFeed_Load);
             this.searchBoxImage.ResumeLayout(false);
             this.searchBoxImage.PerformLayout();
             this.ResumeLayout(false);

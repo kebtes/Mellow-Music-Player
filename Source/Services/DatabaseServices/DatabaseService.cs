@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Mellow_Music_Player.Source.Services;
 
 namespace Mellow_Music_Player.Source.Services.Database_Services
 {

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Windows.Forms;
 using Mellow_Music_Player.Source.Models;
 using Mellow_Music_Player.UI.Forms;
 using NAudio.Wave;

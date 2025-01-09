@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Mellow_Music_Player.Source;
 using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source.Services.Database_Services;
-using Mellow_Music_Player.UI.Forms;
 
 namespace Mellow_Music_Player.UI
 {
@@ -155,21 +148,6 @@ namespace Mellow_Music_Player.UI
 
                 flowLayoutPanel.Controls.Add(panelSongCard);
             });
-        }
-
-        private void labelMusic_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panelFeed_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void searchBoxImage_MouseEnter(object sender, EventArgs e)

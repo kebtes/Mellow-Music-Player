@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Mellow_Music_Player.Source.Services;
+using Mellow_Music_Player.UI.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Mellow_Music_Player.Source;
 
 namespace Mellow_Music_Player.UI
 {
@@ -22,19 +25,26 @@ namespace Mellow_Music_Player.UI
         private Image playlistIcon;
         private Image playlistSelectedIcon;
 
-        public Main()
+        public AudioService audioService;
+        public Settings settings;
+
+        public Main(Settings settings)
         {
             InitializeComponent();
+
+            audioService = new AudioService();
+            this.settings = settings;
 
             feedIcon = Image.FromFile(Constants.FeedIcon);
             feedSelectedIcon = Image.FromFile(Constants.FeedSelectedIcon);
             playlistIcon = Image.FromFile(Constants.PlaylistIcon); 
             playlistSelectedIcon = Image.FromFile(Constants.PlaylistSelectedIcon);
 
-            LoadPage(new panelFeed());
+            LoadPage(new panelFeed(audioService));
+            LoadPlayerPage(new MusicPlayerPanel(audioService, settings));
             UpdateButtonStates();
         }
-
+        
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
@@ -110,7 +120,7 @@ namespace Mellow_Music_Player.UI
         {
             if (!isBtnFeedSelected)
             {
-                LoadPage(new panelFeed());
+                LoadPage(new panelFeed(audioService));
                 isBtnFeedSelected = true;
                 isBtnPlaylistSelected = false;
                 UpdateButtonStates();
@@ -160,5 +170,6 @@ namespace Mellow_Music_Player.UI
                 }
             }
         }
+
     }
 }
