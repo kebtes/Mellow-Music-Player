@@ -54,15 +54,15 @@ namespace Mellow_Music_Player.UI
                 {
                     Text = s.Title,
                     Size = new Size(193, 13),
-                    Font = new Font(Constants.ProjectFont, 9, FontStyle.Bold),
+                    Font = new Font(Constants.ProjectFont, 7, FontStyle.Bold),
                     Location = new Point(74, 20)
                 };
 
                 Label lblArtist = new Label()
                 {
-                    Text = s.Artists[0].ToUpper(),
+                    Text = string.Join(", ", s.Artists),
                     Size = new Size(190, 10),
-                    Font = new Font(Constants.ProjectFont, 7, FontStyle.Regular),
+                    Font = new Font(Constants.ProjectFont, 5, FontStyle.Regular),
                     Location = new Point(74, 36)
                 };
 
@@ -157,11 +157,6 @@ namespace Mellow_Music_Player.UI
             });
         }
 
-        private void PlayButton_MouseDown(object sender, MouseEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void labelMusic_Click(object sender, EventArgs e)
         {
 
@@ -177,9 +172,24 @@ namespace Mellow_Music_Player.UI
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void searchBoxImage_MouseEnter(object sender, EventArgs e)
         {
+            searchBoxImage.BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.SearchBarSelected), 368, 38);
+        }
 
+        private void searchBoxImage_MouseLeave(object sender, EventArgs e)
+        {
+            searchBoxImage.BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.SearchBar), 368, 38);
+        }
+
+        private void searchBoxTextArea_MouseEnter(object sender, EventArgs e)
+        {
+            searchBoxImage.BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.SearchBarSelected), 368, 38);
+        }
+
+        private void searchBoxTextArea_MouseLeave(object sender, EventArgs e)
+        {
+            searchBoxImage.BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.SearchBar), 368, 38);
         }
     }
 }
