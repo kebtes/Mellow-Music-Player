@@ -5,35 +5,38 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Mellow_Music_Player.UI;
-using Mellow_Music_Player.Source.Services;
-using System.Diagnostics;
+using Mellow_Music_Player.Source.Services.Database_Services;
 using Mellow_Music_Player.Source.Models;
+using System.Data.Entity;
+using Mellow_Music_Player.Source.Services;
+using Mellow_Music_Player.Source;
 
 namespace Mellow_Music_Player
 {
     internal static class Program
     {
+        public static Settings settings;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Main());
-            FileService fs = new FileService();
-            
-            List<Song> songs = fs.getSongs();
-            string[] audioFiles = fs.getAudioFiles();
+            if (Environment.OSVersion.Version.Major >= 6)
+                SetProcessDPIAware();
 
+            DatabaseService.InitializeDatabase();
+            FileService.Refresh();
 
-            Console.WriteLine(audioFiles.Length);
-            foreach (Song file in fs.getSongs())
-            {
-                Console.WriteLine(file.Artists[0]);
-            }
+            settings = new Settings();
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Main(settings));
 
         }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
     }
 }
