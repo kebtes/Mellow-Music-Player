@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Mellow_Music_Player.UI;
 using Mellow_Music_Player.Source.Services.Database_Services;
-using Mellow_Music_Player.Source.Models;
-using System.Data.Entity;
 using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source;
+using Mellow_Music_Player.Source.Services.DatabaseServices;
+using System.Collections.Generic;
 
 namespace Mellow_Music_Player
 {
@@ -34,6 +30,12 @@ namespace Mellow_Music_Player
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main(settings));
 
+            //List<Tuple<Song, Fields>> result = SearchService.Search("Rich");
+
+            //foreach (var item in result)
+            //{
+            //    Console.WriteLine(item.Item1.Title);
+            //}
         }
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]

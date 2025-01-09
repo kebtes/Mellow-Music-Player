@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows.Forms;
 
 namespace Mellow_Music_Player.UI
@@ -16,6 +11,7 @@ namespace Mellow_Music_Player.UI
         public const string DarkBlue2 = "#181B22";
         public const string HoverBlue = "#1F1814";
         public const string HoverGrey = "#383C46";
+        public const string HighlightColor = "#E67F0D";
 
 
         public const int HoverPenWidth = 5;

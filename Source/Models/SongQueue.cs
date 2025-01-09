@@ -2,21 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mellow_Music_Player.Source.Models
 {
     public class SongQueue
     {
-        private FileService fileService;
+        //private FileService fileService;
         private List<Song> songs;
         private static int currentIdx = -1;
 
         public SongQueue()
         {
-            fileService = new FileService();
-            songs = fileService.getSongs().ToList();
+            //fileService = new FileService();
+            songs = FileService.getSongs().ToList();
         }
         public Song GetCurrentSong()
         {

@@ -158,6 +158,7 @@
     <Compile Include="Source\Constant.cs" />
     <Compile Include="Source\Services\DatabaseServices\DatabaseService.cs" />
     <Compile Include="Source\Services\DatabaseServices\Queries.cs" />
+    <Compile Include="Source\Services\DatabaseServices\SearchService.cs" />
     <Compile Include="Source\Services\FileService.cs" />
     <Compile Include="Source\Settings.cs" />
     <Compile Include="UI\Constants.cs" />
@@ -182,9 +183,12 @@
     <Compile Include="UI\Forms\MusicPlayer.Designer.cs">
       <DependentUpon>MusicPlayer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ProgressBar.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Content Include="Assets\Icons\SearchBar-Selected.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\SearchBar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Mellow_Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -246,6 +250,7 @@
     <Content Include="Assets\Icons\PrevButton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

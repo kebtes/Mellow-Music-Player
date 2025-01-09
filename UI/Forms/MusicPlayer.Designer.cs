@@ -1,8 +1,4 @@
-﻿using Mellow_Music_Player.Source;
-using System.Windows.Forms;
-using System.Drawing;
-using ReaLTaiizor.Manager;
-using ReaLTaiizor.Colors;
+﻿using System.Windows.Forms;
 
 namespace Mellow_Music_Player.UI.Forms
 {
@@ -89,7 +85,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.playPauseButton.FlatAppearance.BorderSize = 0;
             this.playPauseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.playPauseButton.Image = ((System.Drawing.Image)(resources.GetObject("playPauseButton.Image")));
-            this.playPauseButton.Location = new System.Drawing.Point(523, 34);
+            this.playPauseButton.Location = new System.Drawing.Point(520, 34);
             this.playPauseButton.Name = "playPauseButton";
             this.playPauseButton.Size = new System.Drawing.Size(34, 34);
             this.playPauseButton.TabIndex = 4;
@@ -106,7 +102,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.nextButton.FlatAppearance.BorderSize = 0;
             this.nextButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nextButton.Image = ((System.Drawing.Image)(resources.GetObject("nextButton.Image")));
-            this.nextButton.Location = new System.Drawing.Point(580, 41);
+            this.nextButton.Location = new System.Drawing.Point(577, 41);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(20, 20);
             this.nextButton.TabIndex = 5;
@@ -120,7 +116,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.prevButton.FlatAppearance.BorderSize = 0;
             this.prevButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.prevButton.Image = ((System.Drawing.Image)(resources.GetObject("prevButton.Image")));
-            this.prevButton.Location = new System.Drawing.Point(480, 41);
+            this.prevButton.Location = new System.Drawing.Point(477, 41);
             this.prevButton.Name = "prevButton";
             this.prevButton.Size = new System.Drawing.Size(20, 20);
             this.prevButton.TabIndex = 6;
@@ -137,7 +133,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.progressBar.EdgeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(97)))), ((int)(((byte)(94)))), ((int)(((byte)(90)))));
             this.progressBar.ForeColor = System.Drawing.Color.Black;
             this.progressBar.HatchType = System.Drawing.Drawing2D.HatchStyle.Shingle;
-            this.progressBar.Location = new System.Drawing.Point(358, 23);
+            this.progressBar.Location = new System.Drawing.Point(367, 23);
             this.progressBar.Maximum = 100;
             this.progressBar.Name = "progressBar";
             this.progressBar.PercentageText = "%";
@@ -166,7 +162,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.volumeTrackBar.Location = new System.Drawing.Point(929, 26);
             this.volumeTrackBar.Maximum = 100;
             this.volumeTrackBar.Minimum = 0;
-            this.volumeTrackBar.MinimumSize = new System.Drawing.Size(47, 22);
+            this.volumeTrackBar.MinimumSize = new System.Drawing.Size(47, 20);
             this.volumeTrackBar.Name = "volumeTrackBar";
             this.volumeTrackBar.Size = new System.Drawing.Size(109, 22);
             this.volumeTrackBar.TabIndex = 11;
