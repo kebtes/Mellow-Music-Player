@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using TagLib;
 
-using Mellow_Music_Player.Source;
-using Mellow_Music_Player.Source.Models;
 using Mellow_Music_Player.Source.Services.Database_Services;
 
 
@@ -17,7 +11,7 @@ namespace Mellow_Music_Player.Source.Services
 {
     public static class FileService
     {
-        private static string directory = Settings.songsDirectory;
+        private static string directory = Settings.SongsDirectory;
         private static List<Song> songs = new List<Song>();
 
         private static string[] audioFiles;
