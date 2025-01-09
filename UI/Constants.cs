@@ -31,7 +31,8 @@ namespace Mellow_Music_Player.UI
         public static string PlayButtonSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PlayButton-Selected.png");
         public static string PauseButtonIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PauseButton.png");
         public static string PauseButtonSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PauseButton-Selected.png");
-        
+        public static string SearchBar = Path.Combine(Application.StartupPath, "Assets", "Icons", "SearchBar.png");
+        public static string SearchBarSelected = Path.Combine(Application.StartupPath, "Assets", "Icons", "SearchBar-Selected.png");
         public static string ProjectFont = "Geist";
 
 
