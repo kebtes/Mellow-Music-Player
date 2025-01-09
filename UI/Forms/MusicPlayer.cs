@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
-using NAudio.Wave;
+
+using ReaLTaiizor.Colors;
 
 using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source.Models;
 using Mellow_Music_Player.Source;
+using ReaLTaiizor.Manager;
 
 namespace Mellow_Music_Player.UI.Forms
 {
@@ -22,17 +23,42 @@ namespace Mellow_Music_Player.UI.Forms
         private Song currentSong;
         private BindingSource bindingSource;
         private AudioService audioService;
+        private Settings settings;
 
         private bool isPlaying = false;
 
-        public MusicPlayerPanel()
-        {
-            InitializeComponent();
+        private readonly MaterialSkinManager materialSkinManager;
 
+        private void InitializeTimer()
+        {
+            Timer timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += (s, e) =>
+            {
+                if (audioService.IsPlaying())
+                {
+                    IncrementProgress();
+                }
+            };
+            timer.Start();
+        }
+
+        public MusicPlayerPanel(AudioService audioService, Settings settings)
+        {
+            this.settings = settings;
+
+            InitializeComponent();
+            InitializeTimer();
+
+            materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.ColorScheme = new MaterialColorScheme(Constants.OrangeColor, Constants.OrangeColor, Constants.OrangeColor, Constants.HoverGrey, Constants.OrangeColor);
+            
             songQueue = new SongQueue();
             bindingSource = new BindingSource();
             currentSong = songQueue.GetCurrentSong();
-            audioService = new AudioService();
+
+            this.audioService = audioService;
+            this.audioService.SetMusicPlayerInstance(this);
 
             bindingSource.DataSource = currentSong;
 
@@ -45,7 +71,7 @@ namespace Mellow_Music_Player.UI.Forms
             {
                 if (e.Value is Image originalImage)
                 {
-                    e.Value = ScaleImage.scaleImage(originalImage, this.albumArtPanel.Width, this.albumArtPanel.Height);
+                    e.Value = ScaleImage.Scale(originalImage, this.albumArtPanel.Width, this.albumArtPanel.Height);
                 }
             };
             this.albumArtPanel.DataBindings.Add(imageBinding);
@@ -64,7 +90,6 @@ namespace Mellow_Music_Player.UI.Forms
             this.artistNameLabel.DataBindings.Add(artistBinding);
             this.musicTitleLabel.DataBindings.Add("Text", bindingSource, "Title");
             
-
         }
 
         private void nextButton_Click(object sender, EventArgs e)
@@ -73,7 +98,8 @@ namespace Mellow_Music_Player.UI.Forms
             currentSong = songQueue.GetNextSong();
             bindingSource.DataSource = currentSong;
             bindingSource.ResetBindings(false);
-            audioService.Play();
+            ClearProgress();
+            audioService.Play(false);
             playPauseButton.Refresh();
         }
 
@@ -83,7 +109,8 @@ namespace Mellow_Music_Player.UI.Forms
             currentSong = songQueue.GetPrevSong();
             bindingSource.DataSource = currentSong;
             bindingSource.ResetBindings(false);
-            audioService.Play();
+            ClearProgress();
+            audioService.Play(false);
             playPauseButton.Refresh();
         }
 
@@ -93,6 +120,7 @@ namespace Mellow_Music_Player.UI.Forms
             else audioService.Play();
 
             isPlaying = !isPlaying;
+            SetProgressMaximum();
 
             playPauseButton.Refresh();
         }
@@ -113,11 +141,11 @@ namespace Mellow_Music_Player.UI.Forms
         {
             if (isPlaying)
             {
-                playPauseButton.Image = ScaleImage.scaleImage(Image.FromFile(Constants.PauseButtonSelectedIcon), 21, 21);
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PauseButtonSelectedIcon), 21, 21);
             }
             else
             {
-                playPauseButton.Image = ScaleImage.scaleImage(Image.FromFile(Constants.PlayButtonSelectedIcon), 21, 21);
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonSelectedIcon), 21, 21);
             }
 
             playPauseButton.Refresh();
@@ -127,11 +155,11 @@ namespace Mellow_Music_Player.UI.Forms
         {
             if (isPlaying)
             {
-                playPauseButton.Image = ScaleImage.scaleImage(Image.FromFile(Constants.PauseButtonIcon), 21, 21);
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PauseButtonIcon), 21, 21);
             }
             else
             {
-                playPauseButton.Image = ScaleImage.scaleImage(Image.FromFile(Constants.PlayButtonIcon), 21, 21);
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonIcon), 21, 21);
             }
 
             playPauseButton.Refresh();
@@ -143,6 +171,30 @@ namespace Mellow_Music_Player.UI.Forms
             bindingSource.DataSource = currentSong;
             bindingSource.ResetBindings(false);
             audioService.Play();
+        }
+
+        private void volumeTrackBar_Scroll(object sender, EventArgs e)
+        {
+            audioService.SetVolume(volumeTrackBar.Value);
+        }
+
+        private void SetProgressMaximum()
+        {
+            progressBar.Maximum = (int) currentSong.Duration.TotalSeconds;
+        }
+        private void IncrementProgress()
+        {
+            progressBar.Value++;
+        }
+
+        private void ClearProgress()
+        {
+            progressBar.Value = 0;
+        }
+
+        private void volumeTrackBar_ValueChanged()
+        {
+            audioService.SetVolume(volumeTrackBar.Value / 100.0f);
         }
     }
 }
