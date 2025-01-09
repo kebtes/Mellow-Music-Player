@@ -13,21 +13,32 @@ namespace Mellow_Music_Player.Source.Services
         private AudioFileReader audioFile;
         private SongQueue songQueue = new SongQueue();
         private Song currentSong;
+        private float volume = 1.0f;
 
         private MusicPlayerPanel _musicPlayerPanelInstance;
 
-        public void Play()
+        private TimeSpan playBackPosition = TimeSpan.Zero;
+
+        public void Play(bool fromPlayBackPos = true)
         {
             try
             {
+                currentSong = songQueue.GetCurrentSong();
+
                 Stop();
 
-                currentSong = songQueue.GetCurrentSong();
-                
                 waveOut = new WaveOutEvent();
-                audioFile = new AudioFileReader(currentSong.FilePath);
+                audioFile = new AudioFileReader(currentSong.FilePath)
+                {
+                    Volume = volume
+                };
+
+                audioFile.CurrentTime = fromPlayBackPos ? playBackPosition : TimeSpan.Zero;
+                
                 waveOut.Init(audioFile);
                 waveOut.Play();
+
+                playBackPosition = TimeSpan.Zero;
 
             } 
             catch (Exception ex)
@@ -38,6 +49,11 @@ namespace Mellow_Music_Player.Source.Services
 
         public void Stop()
         {
+            if (waveOut != null && audioFile != null)
+            {
+                playBackPosition = audioFile.CurrentTime;
+            }
+
             waveOut?.Stop();
             waveOut?.Dispose();
             waveOut = null;
@@ -55,10 +71,22 @@ namespace Mellow_Music_Player.Source.Services
                 currentSong = song;
 
                 waveOut = new WaveOutEvent();
-                audioFile = new AudioFileReader(currentSong.FilePath);
+                audioFile = new AudioFileReader(currentSong.FilePath)
+                {
+                    Volume = volume
+                };
+
+                if (currentSong.FilePath == song.FilePath && playBackPosition != TimeSpan.Zero)
+                {
+                    audioFile.CurrentTime = playBackPosition;
+                }
+
                 waveOut.Init(audioFile);
                 waveOut.Play();
+
                 _musicPlayerPanelInstance.setCurrentSong(currentSong);
+
+                playBackPosition = TimeSpan.Zero;
 
             }
             catch(Exception ex)
@@ -71,6 +99,19 @@ namespace Mellow_Music_Player.Source.Services
         public void SetMusicPlayerInstance(MusicPlayerPanel instance)
         {
             _musicPlayerPanelInstance = instance;
+        }
+
+        public bool IsPlaying()
+        {
+            return waveOut?.PlaybackState == PlaybackState.Playing;
+        }
+
+        public void SetVolume(float newVolume)
+        {
+            newVolume = Math.Min(1.0f, Math.Max(0.0f, newVolume));
+            volume = newVolume;
+
+            audioFile.Volume = volume;
         }
     }
 }
