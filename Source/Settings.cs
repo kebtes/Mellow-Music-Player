@@ -2,7 +2,7 @@
 {
     public class Settings
     {
-        private static string songsDirectory = "C:\\Users\\CompUser\\Desktop\\Mellow Music Player\\Sample";
+        private static string songsDirectory = "C:\\Users\\CompUser\\Mellow-Music-Player\\Sample";
 
         private float volume = 1.0f;
 
