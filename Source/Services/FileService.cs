@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Mellow_Music_Player.Source.Services.Database_Services;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Drawing;
-
-using Mellow_Music_Player.Source.Services.Database_Services;
+using System.IO;
 
 
 namespace Mellow_Music_Player.Source.Services
@@ -16,17 +15,18 @@ namespace Mellow_Music_Player.Source.Services
 
         private static string[] audioFiles;
 
-        public static void Refresh() 
-        {   
+        public static void Refresh()
+        {
             try
             {
                 audioFiles = Directory.GetFiles(directory, "*.mp3", SearchOption.TopDirectoryOnly);
-            } catch (FileNotFoundException e)
+            }
+            catch (FileNotFoundException e)
             {
                 Debug.WriteLine("Error while trying to access path in FileService" + e);
             }
 
-           
+
             foreach (string file in audioFiles)
             {
                 try
@@ -57,23 +57,23 @@ namespace Mellow_Music_Player.Source.Services
                         DatabaseService.AddSongToTable(song);
                     }
 
-                } 
+                }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error processing file {file}: {ex.Message}");
                     continue;
                 }
-        
+
             }
 
         }
 
-        public static string[] getAudioFiles()
+        public static string[] GetAudioFiles()
         {
             return audioFiles;
         }
 
-        public static List<Song> getSongs()
+        public static List<Song> GetSongs()
         {
             return songs;
         }
