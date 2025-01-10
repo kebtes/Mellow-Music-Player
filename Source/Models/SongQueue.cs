@@ -1,4 +1,5 @@
 ﻿using Mellow_Music_Player.Source.Services;
+using Mellow_Music_Player.Source.Services.Database_Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,12 @@ namespace Mellow_Music_Player.Source.Models
 {
     public class SongQueue
     {
-        //private FileService fileService;
         private List<Song> songs;
         private static int currentIdx = -1;
 
         public SongQueue()
         {
-            //fileService = new FileService();
-            songs = FileService.getSongs().ToList();
+            songs = DatabaseService.GetSongs();
         }
         public Song GetCurrentSong()
         {
