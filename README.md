@@ -1,4 +1,7 @@
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6be9f0cc-d45f-43d8-a0ab-cce604e52e91" alt="Mellow_Icon">
+</p>
 
-![Mellow_Icon](https://github.com/user-attachments/assets/4c3fd7db-f61c-4fee-ab7d-f43f9e8a4deb)
-![repository-banner]([path-to-your-image.jpg](https://github.com/user-attachments/assets/4c3fd7db-f61c-4fee-ab7d-f43f9e8a4deb))
-<h1>Mellow Music Player</h1>
+<h1 align="center"><strong>Mellow Music Player</strong></h1>
+
+
