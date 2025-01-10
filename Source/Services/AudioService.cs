@@ -1,7 +1,7 @@
-﻿using System;
-using Mellow_Music_Player.Source.Models;
+﻿using Mellow_Music_Player.Source.Models;
 using Mellow_Music_Player.UI.Forms;
 using NAudio.Wave;
+using System;
 
 namespace Mellow_Music_Player.Source.Services
 {
@@ -21,7 +21,9 @@ namespace Mellow_Music_Player.Source.Services
         {
             try
             {
-                currentSong = songQueue.GetCurrentSong();
+                //currentSong = songQueue.GetCurrentSong();
+
+                if (currentSong == null) currentSong = songQueue.GetCurrentSong();
 
                 Stop();
 
@@ -32,13 +34,13 @@ namespace Mellow_Music_Player.Source.Services
                 };
 
                 audioFile.CurrentTime = fromPlayBackPos ? playBackPosition : TimeSpan.Zero;
-                
+
                 waveOut.Init(audioFile);
                 waveOut.Play();
 
                 playBackPosition = TimeSpan.Zero;
 
-            } 
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -60,7 +62,7 @@ namespace Mellow_Music_Player.Source.Services
             audioFile = null;
         }
 
-        public void PlaySong(Song song)
+        public void Play(Song song)
         {
             try
             {
@@ -68,16 +70,16 @@ namespace Mellow_Music_Player.Source.Services
 
                 currentSong = song;
 
+
                 waveOut = new WaveOutEvent();
                 audioFile = new AudioFileReader(currentSong.FilePath)
                 {
                     Volume = volume
                 };
 
-                if (currentSong.FilePath == song.FilePath && playBackPosition != TimeSpan.Zero)
-                {
-                    audioFile.CurrentTime = playBackPosition;
-                }
+                playBackPosition = TimeSpan.Zero;
+
+                //MessageBox.Show(currentSong.FilePath);
 
                 waveOut.Init(audioFile);
                 waveOut.Play();
@@ -87,13 +89,25 @@ namespace Mellow_Music_Player.Source.Services
                 playBackPosition = TimeSpan.Zero;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
 
         }
 
+        public void Next()
+        {
+            currentSong = songQueue.GetCurrentSong();
+
+            Play(false);
+        }
+
+        public void Prev()
+        {
+            currentSong = songQueue.GetCurrentSong();
+            Play(false);
+        }
         public void SetMusicPlayerInstance(MusicPlayerPanel instance)
         {
             _musicPlayerPanelInstance = instance;
