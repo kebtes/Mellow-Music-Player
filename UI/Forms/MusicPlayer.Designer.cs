@@ -37,9 +37,11 @@ namespace Mellow_Music_Player.UI.Forms
             this.playPauseButton = new System.Windows.Forms.Button();
             this.nextButton = new System.Windows.Forms.Button();
             this.prevButton = new System.Windows.Forms.Button();
-            this.progressBar = new ReaLTaiizor.Controls.RibbonProgressBarCenter();
+            progressBar = new ReaLTaiizor.Controls.RibbonProgressBarCenter();
             this.volumeTrackBar = new ReaLTaiizor.Controls.DungeonTrackBar();
             this.button1 = new System.Windows.Forms.Button();
+            this.currentTime = new System.Windows.Forms.Label();
+            this.totalTime = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // albumArtPanel
@@ -91,7 +93,6 @@ namespace Mellow_Music_Player.UI.Forms
             this.playPauseButton.TabIndex = 4;
             this.playPauseButton.UseVisualStyleBackColor = false;
             this.playPauseButton.Click += new System.EventHandler(this.playPauseButton_Click);
-            this.playPauseButton.Paint += new System.Windows.Forms.PaintEventHandler(this.playPauseButton_Paint);
             this.playPauseButton.MouseEnter += new System.EventHandler(this.playPauseButton_MouseEnter);
             this.playPauseButton.MouseLeave += new System.EventHandler(this.playPauseButton_MouseLeave);
             // 
@@ -108,6 +109,8 @@ namespace Mellow_Music_Player.UI.Forms
             this.nextButton.TabIndex = 5;
             this.nextButton.UseVisualStyleBackColor = false;
             this.nextButton.Click += new System.EventHandler(this.nextButton_Click);
+            this.nextButton.MouseEnter += new System.EventHandler(this.nextButton_MouseEnter);
+            this.nextButton.MouseLeave += new System.EventHandler(this.nextButton_MouseLeave);
             // 
             // prevButton
             // 
@@ -122,34 +125,36 @@ namespace Mellow_Music_Player.UI.Forms
             this.prevButton.TabIndex = 6;
             this.prevButton.UseVisualStyleBackColor = false;
             this.prevButton.Click += new System.EventHandler(this.prevButton_Click);
+            this.prevButton.MouseEnter += new System.EventHandler(this.prevButton_MouseEnter);
+            this.prevButton.MouseLeave += new System.EventHandler(this.prevButton_MouseLeave);
             // 
             // progressBar
             // 
-            this.progressBar.BackColor = System.Drawing.Color.Transparent;
-            this.progressBar.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.progressBar.BorderColor = System.Drawing.Color.Transparent;
-            this.progressBar.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(201)))), ((int)(((byte)(205)))));
-            this.progressBar.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(186)))), ((int)(((byte)(190)))));
-            this.progressBar.EdgeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(97)))), ((int)(((byte)(94)))), ((int)(((byte)(90)))));
-            this.progressBar.ForeColor = System.Drawing.Color.Black;
-            this.progressBar.HatchType = System.Drawing.Drawing2D.HatchStyle.Shingle;
-            this.progressBar.Location = new System.Drawing.Point(367, 23);
-            this.progressBar.Maximum = 100;
-            this.progressBar.Name = "progressBar";
-            this.progressBar.PercentageText = "%";
-            this.progressBar.ProgressBorderColorA = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(97)))), ((int)(((byte)(94)))), ((int)(((byte)(90)))));
-            this.progressBar.ProgressBorderColorB = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(95)))), ((int)(((byte)(27)))));
-            this.progressBar.ProgressColorA = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(95)))), ((int)(((byte)(27)))));
-            this.progressBar.ProgressColorB = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(95)))), ((int)(((byte)(27)))));
-            this.progressBar.ProgressLineColorA = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.progressBar.ProgressLineColorB = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.progressBar.ShowEdge = false;
-            this.progressBar.ShowPercentage = false;
-            this.progressBar.Size = new System.Drawing.Size(340, 5);
-            this.progressBar.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            this.progressBar.TabIndex = 9;
-            this.progressBar.Text = "ribbonProgressBarCenter1";
-            this.progressBar.Value = 0;
+            progressBar.BackColor = System.Drawing.Color.Transparent;
+            progressBar.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            progressBar.BorderColor = System.Drawing.Color.Transparent;
+            progressBar.ColorA = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(201)))), ((int)(((byte)(205)))));
+            progressBar.ColorB = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(186)))), ((int)(((byte)(190)))));
+            progressBar.EdgeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(97)))), ((int)(((byte)(94)))), ((int)(((byte)(90)))));
+            progressBar.ForeColor = System.Drawing.Color.Black;
+            progressBar.HatchType = System.Drawing.Drawing2D.HatchStyle.Shingle;
+            progressBar.Location = new System.Drawing.Point(367, 23);
+            progressBar.Maximum = 100;
+            progressBar.Name = "progressBar";
+            progressBar.PercentageText = "%";
+            progressBar.ProgressBorderColorA = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(97)))), ((int)(((byte)(94)))), ((int)(((byte)(90)))));
+            progressBar.ProgressBorderColorB = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(95)))), ((int)(((byte)(27)))));
+            progressBar.ProgressColorA = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(95)))), ((int)(((byte)(27)))));
+            progressBar.ProgressColorB = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(95)))), ((int)(((byte)(27)))));
+            progressBar.ProgressLineColorA = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            progressBar.ProgressLineColorB = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            progressBar.ShowEdge = false;
+            progressBar.ShowPercentage = false;
+            progressBar.Size = new System.Drawing.Size(340, 5);
+            progressBar.SmoothingType = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            progressBar.TabIndex = 9;
+            progressBar.Text = "ribbonProgressBarCenter1";
+            progressBar.Value = 0;
             // 
             // volumeTrackBar
             // 
@@ -186,15 +191,40 @@ namespace Mellow_Music_Player.UI.Forms
             this.button1.TabIndex = 12;
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // currentTime
+            // 
+            this.currentTime.AutoSize = true;
+            this.currentTime.Font = new System.Drawing.Font("Geist", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.currentTime.Location = new System.Drawing.Point(314, 17);
+            this.currentTime.Name = "currentTime";
+            this.currentTime.Size = new System.Drawing.Size(47, 16);
+            this.currentTime.TabIndex = 13;
+            this.currentTime.Text = "00:00";
+            this.currentTime.Click += new System.EventHandler(this.currentTime_Click);
+            // 
+            // totalTime
+            // 
+            this.totalTime.AutoSize = true;
+            this.totalTime.Font = new System.Drawing.Font("Geist", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.totalTime.Location = new System.Drawing.Point(713, 17);
+            this.totalTime.Name = "totalTime";
+            this.totalTime.Size = new System.Drawing.Size(47, 16);
+            this.totalTime.TabIndex = 14;
+            this.totalTime.Text = "99:99";
+            // 
             // MusicPlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
             this.ClientSize = new System.Drawing.Size(1082, 83);
+            this.Controls.Add(this.totalTime);
+            this.Controls.Add(this.currentTime);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.volumeTrackBar);
-            this.Controls.Add(this.progressBar);
+            this.Controls.Add(progressBar);
             this.Controls.Add(this.nextButton);
             this.Controls.Add(this.playPauseButton);
             this.Controls.Add(this.prevButton);
@@ -216,8 +246,10 @@ namespace Mellow_Music_Player.UI.Forms
         private System.Windows.Forms.Button playPauseButton;
         private System.Windows.Forms.Button nextButton;
         private System.Windows.Forms.Button prevButton;
-        private ReaLTaiizor.Controls.RibbonProgressBarCenter progressBar;
         private ReaLTaiizor.Controls.DungeonTrackBar volumeTrackBar;
         private Button button1;
+        private Label currentTime;
+        private Label totalTime;
+        private static ReaLTaiizor.Controls.RibbonProgressBarCenter progressBar;
     }
 }
