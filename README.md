@@ -1,4 +1,4 @@
 
-![mellow_banner](https://github.com/user-attachments/assets/f57b91f0-fad5-4a9d-992b-e39268331fbb)
+![Mellow_Icon](https://github.com/user-attachments/assets/4c3fd7db-f61c-4fee-ab7d-f43f9e8a4deb)
 
-<h1>Mellow Music Player | Minimal music player made with C#</h1>
+<h1>Mellow Music Player</h1>
