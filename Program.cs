@@ -11,6 +11,12 @@ namespace Mellow_Music_Player
 {
     internal static class Program
     {
+        public async static void lyrics()
+        {
+            var lyrics = await LyricsService.GetLyrics("The Nights", "Avicii");
+            Console.Write(lyrics.ToString());
+            lyrics.ForEach(line => Console.WriteLine(line));
+        }
         public static Settings settings;
         /// <summary>
         /// The main entry point for the application.
@@ -24,18 +30,27 @@ namespace Mellow_Music_Player
             DatabaseService.InitializeDatabase();
             FileService.Refresh();
 
+            lyrics();
+            //DatabaseService.AddToPlaylist("Liked Songs", 1);
             settings = new Settings();
-
+            
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main(settings));
 
-            //List<Tuple<Song, Fields>> result = SearchService.Search("Rich");
+            //Console.WriteLine(DatabaseService.GetPlaylists().ToArray()[0].PlaylistName);
+            //List<Song> s = DatabaseService.GetPlaylistSongs("Liked Songs");
+            //Console.WriteLine(s.Count);
+            //Console.WriteLine(DatabaseService.DebugPlaylistSongs());
+            //DatabaseService.DebugPlaylistSongs();
 
-            //foreach (var item in result)
-            //{
-            //    Console.WriteLine(item.Item1.Title);
-            //}
+
+
+
+
+
+
         }
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
