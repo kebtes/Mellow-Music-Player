@@ -125,5 +125,10 @@ namespace Mellow_Music_Player.Source.Services
 
             audioFile.Volume = volume;
         }
+
+        public Song GetCurrentSong()
+        {
+            return currentSong;
+        }
     }
 }
