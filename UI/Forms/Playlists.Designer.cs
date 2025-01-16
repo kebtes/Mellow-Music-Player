@@ -40,6 +40,17 @@ namespace Mellow_Music_Player.UI.Forms
             this.songLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
+            // label1
+            // 
+            label1.Font = new System.Drawing.Font("Geist", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            label1.Location = new System.Drawing.Point(3, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(574, 532);
+            label1.TabIndex = 0;
+            label1.Text = "Choose a Playlist to show!!";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // separator
             // 
             this.separator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
@@ -83,17 +94,6 @@ namespace Mellow_Music_Player.UI.Forms
             this.playlistLayoutPanel.Size = new System.Drawing.Size(269, 532);
             this.playlistLayoutPanel.TabIndex = 5;
             this.playlistLayoutPanel.WrapContents = false;
-            // 
-            // label1
-            // 
-            label1.Font = new System.Drawing.Font("Geist", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
-            label1.Location = new System.Drawing.Point(3, 0);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(574, 532);
-            label1.TabIndex = 0;
-            label1.Text = "Choose a Playlist to show!!";
-            label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Playlists
             // 

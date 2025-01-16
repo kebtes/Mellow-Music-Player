@@ -16,10 +16,12 @@ namespace Mellow_Music_Player.UI.Forms
     {
         AudioService audioService;
         MusicPlayerPanel musicPlayerPanel;
+        Playlist selectedPlaylistName = null;
 
         public Playlists(AudioService audioService)
         {
             this.audioService = audioService;
+            this.DoubleBuffered = true;
             //this.musicPlayerPanel = musicPlayerPanel;
 
             string lastPlayedPlaylist = Settings.LastOpenedPlaylist;
@@ -49,6 +51,7 @@ namespace Mellow_Music_Player.UI.Forms
             Label playlistNameLabel = new Label
             {
                 Text = playlist.PlaylistName,
+                Size = new Size(574, 20),
                 Font = new Font(Constants.ProjectFont, 8, FontStyle.Bold),
                 ForeColor = ColorTranslator.FromHtml(unselColor),
                 BackColor = Color.Transparent,
@@ -77,8 +80,10 @@ namespace Mellow_Music_Player.UI.Forms
                 {
                     selectedPlaylistLabel.Font = new Font(Constants.ProjectFont, 8, FontStyle.Bold);
                     selectedPlaylistLabel.ForeColor = ColorTranslator.FromHtml(unselColor);
-                }
 
+                
+                }
+                selectedPlaylistName = playlist;
                 selectedPlaylistLabel = playlistNameLabel;
                 selectedPlaylistLabel.Font = new Font(Constants.ProjectFont, 8, FontStyle.Bold | FontStyle.Underline);
                 selectedPlaylistLabel.ForeColor = ColorTranslator.FromHtml(Constants.OrangeColor);
@@ -173,6 +178,13 @@ namespace Mellow_Music_Player.UI.Forms
                 Location = new Point(500, 15),
             };
 
+            Button removeButton = new Button
+            {
+                Size = new Size(20, 20),
+                BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.DeleteIcon), 20, 20),
+                Location = new Point(530, 20),
+            };
+
             playButton.MouseClick += (sender, e) =>
             {
                 // Deselect previously selected panel
@@ -202,8 +214,27 @@ namespace Mellow_Music_Player.UI.Forms
                 playButton.BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonSmallIcon), 30, 30);
             };
 
+            removeButton.MouseEnter += (sender, e) =>
+            {
+                removeButton.BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.DeleteSelectedIcon), 20, 20);
+            };
+
+            removeButton.MouseLeave += (sender, e) =>
+            {
+                removeButton.BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.DeleteIcon), 20, 20);
+            };
+
+            removeButton.MouseClick += (sender, e) =>
+            {
+                DatabaseService.RemoveFromPlaylist(selectedPlaylistName.PlaylistName, s);
+                LoadPlaylistSongs(selectedPlaylistName);
+            };
+
+
             playButton.FlatStyle = FlatStyle.Flat;
             playButton.FlatAppearance.BorderSize = 0;
+            removeButton.FlatStyle = FlatStyle.Flat;
+            removeButton.FlatAppearance.BorderSize = 0;
 
             panelSongCard.MouseEnter += (sender, e) =>
             {
@@ -266,9 +297,10 @@ namespace Mellow_Music_Player.UI.Forms
             panelSongCard.Controls.Add(lblArtist);
             panelSongCard.Controls.Add(panelAlbumArt);
             panelSongCard.Controls.Add(playButton);
-            //panelSongCard.Controls.Add(deleteButton);
+            panelSongCard.Controls.Add(removeButton);
 
             parentComponent.Controls.Add(panelSongCard);
+            parentComponent.Show();
 
         }
 
