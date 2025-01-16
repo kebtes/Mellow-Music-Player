@@ -2,12 +2,11 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-using ReaLTaiizor.Colors;
-
 using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source.Models;
 using Mellow_Music_Player.Source;
 using ReaLTaiizor.Manager;
+using Mellow_Music_Player.Source.Services.Database_Services;
 
 namespace Mellow_Music_Player.UI.Forms
 {
@@ -19,10 +18,9 @@ namespace Mellow_Music_Player.UI.Forms
         private AudioService audioService;
         private Settings settings;
         private TimeSpan songCurrentTime = TimeSpan.Zero;
+        private panelFeed feed;
 
-        private bool isPlaying = false;
-
-        private readonly MaterialSkinManager materialSkinManager;
+        private static bool isPlaying = false;
 
         private void InitializeTimer()
         {
@@ -41,16 +39,14 @@ namespace Mellow_Music_Player.UI.Forms
         }
 
 
-        public MusicPlayerPanel(AudioService audioService, Settings settings)
+        public MusicPlayerPanel(AudioService audioService, Settings settings, panelFeed panelFeed)
         {
             this.settings = settings;
+            this.feed = panelFeed;
 
             InitializeComponent();
             InitializeTimer();
 
-            materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.ColorScheme = new MaterialColorScheme(Constants.OrangeColor, Constants.OrangeColor, Constants.OrangeColor, Constants.HoverGrey, Constants.OrangeColor);
-            
             songQueue = new SongQueue();
             bindingSource = new BindingSource();
             currentSong = songQueue.GetCurrentSong();
@@ -100,6 +96,14 @@ namespace Mellow_Music_Player.UI.Forms
 
             this.totalTime.DataBindings.Add(totalTimeBinding);
 
+            UpdateHeart();     
+            
+        }
+
+        private void UpdateHeart()
+        {
+            bool likedSong = DatabaseService.IsSongInPlaylist("Liked Songs", currentSong);
+            this.heartButton.Image = likedSong ? Image.FromFile(Constants.HeartIconSelected) : Image.FromFile(Constants.HeartIcon);
         }
 
         private void nextButton_Click(object sender, EventArgs e)
@@ -113,6 +117,8 @@ namespace Mellow_Music_Player.UI.Forms
             audioService.Next();
             //audioService.Play(false);
             playPauseButton.Refresh();
+            this.feed.LoadLyrics();
+            UpdateHeart();
         }
 
         private void prevButton_Click(object sender, EventArgs e)
@@ -126,6 +132,8 @@ namespace Mellow_Music_Player.UI.Forms
             audioService.Prev();
             //audioService.Play(false);
             playPauseButton.Refresh();
+            this.feed.LoadLyrics();
+            UpdateHeart();
         }
 
         private void playPauseButton_Click(object sender, EventArgs e)
@@ -137,6 +145,7 @@ namespace Mellow_Music_Player.UI.Forms
             SetProgressMaximum();
 
             playPauseButton.Refresh();
+            this.feed.LoadLyrics();
         }
 
         private void playPauseButton_MouseEnter(object sender, EventArgs e)
@@ -189,11 +198,11 @@ namespace Mellow_Music_Player.UI.Forms
             progressBar.Value++;
         }
 
-        public static void ClearProgress()
+        public void ClearProgress()
         {
             progressBar.Value = 0;
         }
-        public static float GetVal()
+        public float GetVal()
         {
             return progressBar.Value;
         }
@@ -205,7 +214,12 @@ namespace Mellow_Music_Player.UI.Forms
 
         private void currentTime_Click(object sender, EventArgs e)
         {
+        }
 
+        public void SetPlaying(bool status)
+        {
+            isPlaying = status;
+            playPauseButton.Invalidate();
         }
 
         private void UpdateCurrentTimeLabel()
@@ -231,6 +245,29 @@ namespace Mellow_Music_Player.UI.Forms
         private void nextButton_MouseLeave(object sender, EventArgs e)
         {
             nextButton.Image = ScaleImage.Scale(Image.FromFile(Constants.NextButtonIcon), 16, 16);
+        }
+
+        private void playPauseButton_Paint(object sender, PaintEventArgs e)
+        {
+            if (isPlaying)
+            {
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonIcon), 21, 21);
+            }
+
+            else
+            {
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PauseButtonIcon), 21, 21);
+            }
+        }
+
+        private void heartButton_Click(object sender, EventArgs e)
+        {
+            bool likedSong = DatabaseService.IsSongInPlaylist("Liked Songs", currentSong);
+            
+            if (likedSong) DatabaseService.RemoveFromPlaylist("Liked Songs", currentSong); 
+            else DatabaseService.AddToPlaylist("Liked Songs", currentSong);
+
+            UpdateHeart();
         }
     }
 }

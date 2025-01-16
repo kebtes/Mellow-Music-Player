@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using Mellow_Music_Player.Source;
+using Mellow_Music_Player.Source.Models;
 using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source.Services.Database_Services;
 using Mellow_Music_Player.Source.Services.DatabaseServices;
@@ -16,14 +16,15 @@ namespace Mellow_Music_Player.UI
     {
         //private FileService fileService;
         private AudioService audioService;
+        private MusicPlayerPanel musicPlayerPanel;
         //private MusicPlayerPanel musicPlayerPanel;
-        //private MusicPlayerPanel musicPlayerPanel;
-        
-        public panelFeed(AudioService audioService)
+
+        public panelFeed(AudioService audioService, MusicPlayerPanel musicPlayerPanel)
         {
             //fileService = new FileService();
+            this.DoubleBuffered = true;
             this.audioService = audioService;
-            //this.musicPlayerPanel = musicPlayerPanel;
+            this.musicPlayerPanel = musicPlayerPanel;
 
             InitializeComponent();
             LoadSongs();
@@ -82,12 +83,50 @@ namespace Mellow_Music_Player.UI
                 BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonSmallIcon), 30, 30),
                 Location = new Point(500, 15),
             };
-            Button meatBallMenuButton = new Button
+            Button addToPlaylistBtn = new Button
             {
                 Size = new Size(25, 25),
-                BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.MeatballMenuIcon), 25, 25),
+                BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.AddIcon), 25, 25),
                 Location = new Point(530, 18),
             };
+
+            // TODO - Fetch the playlists from db here
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+            List<Playlist> playlists = DatabaseService.GetPlaylists();
+            playlists.ForEach(p =>
+            {
+                ToolStripMenuItem playlistName = new ToolStripMenuItem(p.PlaylistName);
+                playlistName.TextAlign = ContentAlignment.MiddleLeft;
+                playlistName.Font = new Font(Constants.ProjectFont, 7, FontStyle.Regular);
+                playlistName.BackColor = ColorTranslator.FromHtml(Constants.HoverGrey);
+                playlistName.ForeColor = Color.White;
+
+                playlistName.MouseEnter += (sender, e) =>
+                {
+                    playlistName.BackColor = ColorTranslator.FromHtml(Constants.HoverGrey);
+                    playlistName.Font = new Font(Constants.ProjectFont, 7, FontStyle.Regular | FontStyle.Underline);
+                    //playlistName.ForeColor = ColorTranslator.FromHtml(Constants.OrangeColor);
+
+                };
+
+                playlistName.MouseLeave += (sender, e) =>
+                {
+                    playlistName.BackColor = ColorTranslator.FromHtml(Constants.HoverGrey);
+                    playlistName.Font = new Font(Constants.ProjectFont, 7, FontStyle.Regular);
+                    //playlistName.ForeColor = Color.White;
+                };
+
+                contextMenuStrip.Items.Add(playlistName);
+            });
+            //contextMenuStrip.BackColor = ColorTranslator.FromHtml(Constants.HoverGrey);
+            //contextMenuStrip.BackgroundImage = null;
+
+            contextMenuStrip.ItemClicked += (sender, e) =>
+            {
+                ToolStripItem clickedItem = e.ClickedItem;
+                DatabaseService.AddToPlaylist(clickedItem.Text, s);
+            };
+
 
             playButton.MouseClick += (sender, e) =>
             {
@@ -96,14 +135,13 @@ namespace Mellow_Music_Player.UI
                 {
                     currentlySelectedPanel.BackColor = ColorTranslator.FromHtml(Constants.DarkBlue);
                     currentlySelectedPanel.Invalidate(true);
-
                 }
 
                 currentlySelectedPanel = panelSongCard;
                 panelSongCard.BackColor = ColorTranslator.FromHtml(Constants.HoverBlue);
                 panelSongCard.Invalidate();
 
-                //musicPlayerPanel.ClearProgress();
+                musicPlayerPanel.ClearProgress();
                 audioService.Play(s);
             };
 
@@ -119,8 +157,14 @@ namespace Mellow_Music_Player.UI
 
             playButton.FlatStyle = FlatStyle.Flat;
             playButton.FlatAppearance.BorderSize = 0;
-            meatBallMenuButton.FlatStyle = FlatStyle.Flat;
-            meatBallMenuButton.FlatAppearance.BorderSize = 0;
+            addToPlaylistBtn.FlatStyle = FlatStyle.Flat;
+            addToPlaylistBtn.FlatAppearance.BorderSize = 0;
+
+            addToPlaylistBtn.Click += (sender, e) =>
+            {
+                contextMenuStrip.Show(addToPlaylistBtn, new Point(0, addToPlaylistBtn.Height));
+            };
+
 
             panelSongCard.MouseEnter += (sender, e) =>
             {
@@ -199,7 +243,7 @@ namespace Mellow_Music_Player.UI
             panelSongCard.Controls.Add(lblArtist);
             panelSongCard.Controls.Add(panelAlbumArt);
             panelSongCard.Controls.Add(playButton);
-            panelSongCard.Controls.Add(meatBallMenuButton);
+            panelSongCard.Controls.Add(addToPlaylistBtn);
 
             parentComponent.Controls.Add(panelSongCard);
         }

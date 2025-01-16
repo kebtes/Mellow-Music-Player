@@ -44,7 +44,9 @@ namespace Mellow_Music_Player.UI
             this.resultPanel = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.searchBoxImage.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.resultPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,6 +134,7 @@ namespace Mellow_Music_Player.UI
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(587, 142);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(2, 540);
@@ -155,6 +158,7 @@ namespace Mellow_Music_Player.UI
             this.textBox1.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox1.Size = new System.Drawing.Size(366, 522);
             this.textBox1.TabIndex = 0;
@@ -170,6 +174,14 @@ namespace Mellow_Music_Player.UI
             this.label1.Size = new System.Drawing.Size(60, 21);
             this.label1.TabIndex = 8;
             this.label1.Text = "Lyrics";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(2, 540);
+            this.panel3.TabIndex = 3;
             // 
             // panelFeed
             // 
@@ -191,6 +203,7 @@ namespace Mellow_Music_Player.UI
             this.Text = "Form1";
             this.searchBoxImage.ResumeLayout(false);
             this.searchBoxImage.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.resultPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -210,5 +223,6 @@ namespace Mellow_Music_Player.UI
         private TextBox textBox1;
         private Label label1;
         private FlowLayoutPanel flowLayoutPanel;
+        private Panel panel3;
     }
 }

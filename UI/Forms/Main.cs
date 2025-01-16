@@ -37,8 +37,9 @@ namespace Mellow_Music_Player.UI
 
             audioService = new AudioService();
             this.settings = settings;
+            this.musicPlayerPanel = new MusicPlayerPanel(audioService, this.settings, this.feed);
 
-            this.feed = new panelFeed(audioService);
+            this.feed = new panelFeed(audioService, musicPlayerPanel);
 
             feedIcon = Image.FromFile(Constants.FeedIcon);
             feedSelectedIcon = Image.FromFile(Constants.FeedSelectedIcon);
@@ -47,7 +48,9 @@ namespace Mellow_Music_Player.UI
 
 
             LoadPage(this.feed);
-            LoadPlayerPage(new MusicPlayerPanel(audioService, settings, this.feed));
+
+            //LoadPlayerPage(new MusicPlayerPanel(audioService, settings, this.feed));
+            LoadPlayerPage(musicPlayerPanel);
             UpdateButtonStates();
         }
         
@@ -126,7 +129,7 @@ namespace Mellow_Music_Player.UI
         {
             if (!isBtnFeedSelected)
             {
-                LoadPage(new panelFeed(audioService));
+                LoadPage(new panelFeed(audioService, musicPlayerPanel));
                 isBtnFeedSelected = true;
                 isBtnPlaylistSelected = false;
                 UpdateButtonStates();
