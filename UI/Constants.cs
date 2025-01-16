@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Mellow_Music_Player.UI
@@ -13,6 +14,7 @@ namespace Mellow_Music_Player.UI
         public const string HoverGrey = "#383C46";
         public const string HighlightColor = "#E67F0D";
 
+        public static string ProjectFont = "Geist";
 
         public const int HoverPenWidth = 5;
 
@@ -27,10 +29,22 @@ namespace Mellow_Music_Player.UI
         public static string PlayButtonSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PlayButton-Selected.png");
         public static string PauseButtonIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PauseButton.png");
         public static string PauseButtonSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PauseButton-Selected.png");
+        public static string NextButtonIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "NextButton.png");
+        public static string NextButtonSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "NextButton-Selected.png");
+        public static string PreviousButtonIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PrevButton.png");
+        public static string PreviousButtonSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "PrevButton-Selected.png");
         public static string SearchBar = Path.Combine(Application.StartupPath, "Assets", "Icons", "SearchBar.png");
         public static string SearchBarSelected = Path.Combine(Application.StartupPath, "Assets", "Icons", "SearchBar-Selected.png");
-        public static string ProjectFont = "Geist";
+        public static string DeleteIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Delete.png");
+        public static string DeleteSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Delete-Selected.png");
+        public static string AddIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Add.png");
+        public static string AddIconSelected = Path.Combine(Application.StartupPath, "Assets", "Icons", "Add-Selected.png");
+        public static string HeartIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Heart.png");
+        public static string HeartIconSelected = Path.Combine(Application.StartupPath, "Assets", "Icons", "Heart-Selected.png");
 
-
+        //Component locations
+        public static string PlaylistCardRed = Path.Combine(Application.StartupPath, "Assets", "Components", "PlaylistRectangle_Red.png");
+        public static string PlaylistCardGreen = Path.Combine(Application.StartupPath, "Assets", "Components", "PlaylistRectangle_Green.png");
+        public static string PlaylistCardPurple = Path.Combine(Application.StartupPath, "Assets", "Components", "PlaylistRectangle_Purple.png");
     }
 }
