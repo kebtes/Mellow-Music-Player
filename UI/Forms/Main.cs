@@ -143,7 +143,7 @@ namespace Mellow_Music_Player.UI
         {
             if (!isBtnPlaylistSelected)
             {
-                LoadPage(new Playlists(audioService));
+                LoadPage(new Playlists(audioService, musicPlayerPanel));
                 isBtnPlaylistSelected = true;
                 isBtnFeedSelected = false;
                 UpdateButtonStates();

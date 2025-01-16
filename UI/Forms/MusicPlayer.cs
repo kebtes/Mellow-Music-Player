@@ -122,7 +122,7 @@ namespace Mellow_Music_Player.UI.Forms
             songCurrentTime = TimeSpan.Zero;
             audioService.Next();
             //audioService.Play(false);
-            playPauseButton.Refresh();
+            UpdatePlayPauseButton();
             feed.LoadLyrics();
             UpdateHeart();
         }
@@ -137,7 +137,7 @@ namespace Mellow_Music_Player.UI.Forms
             songCurrentTime = TimeSpan.Zero;
             audioService.Prev();
             //audioService.Play(false);
-            playPauseButton.Refresh();
+            UpdatePlayPauseButton();
             feed.LoadLyrics();
             UpdateHeart();
         }
@@ -150,8 +150,20 @@ namespace Mellow_Music_Player.UI.Forms
             isPlaying = !isPlaying;
             SetProgressMaximum();
 
-            playPauseButton.Refresh();
+            UpdatePlayPauseButton();
             feed.LoadLyrics();
+        }
+
+        public void UpdatePlayPauseButton()
+        {
+            if (isPlaying)
+            {
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PauseButtonIcon), 21, 21);
+            }
+            else
+            {
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonIcon), 21, 21);
+            }
         }
 
         private void playPauseButton_MouseEnter(object sender, EventArgs e)
@@ -165,7 +177,7 @@ namespace Mellow_Music_Player.UI.Forms
                 playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonSelectedIcon), 21, 21);
             }
 
-            playPauseButton.Refresh();
+            UpdatePlayPauseButton();
         }
 
         private void playPauseButton_MouseLeave(object sender, EventArgs e)
@@ -179,7 +191,7 @@ namespace Mellow_Music_Player.UI.Forms
                 playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonIcon), 21, 21);
             }
 
-            playPauseButton.Refresh();
+            UpdatePlayPauseButton();
         }
 
         public void setCurrentSong(Song song)
@@ -255,15 +267,7 @@ namespace Mellow_Music_Player.UI.Forms
 
         private void playPauseButton_Paint(object sender, PaintEventArgs e)
         {
-            if (isPlaying)
-            {
-                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonIcon), 21, 21);
-            }
-
-            else
-            {
-                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PauseButtonIcon), 21, 21);
-            }
+            
         }
 
         private void heartButton_Click(object sender, EventArgs e)
@@ -279,6 +283,19 @@ namespace Mellow_Music_Player.UI.Forms
         public void SetFeedPanel(panelFeed feed)
         {
             this.feed = feed;
+        }
+
+        private void playPauseButton_Paint_1(object sender, PaintEventArgs e)
+        {
+            if (isPlaying)
+            {
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonIcon), 21, 21);
+            }
+
+            else
+            {
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PauseButtonIcon), 21, 21);
+            }
         }
     }
 }

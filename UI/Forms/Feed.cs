@@ -142,6 +142,8 @@ namespace Mellow_Music_Player.UI
                 panelSongCard.Invalidate();
 
                 musicPlayerPanel.ClearProgress();
+                musicPlayerPanel.SetPlaying(true);
+                musicPlayerPanel.UpdatePlayPauseButton();
                 audioService.Play(s);
             };
 

@@ -18,11 +18,11 @@ namespace Mellow_Music_Player.UI.Forms
         MusicPlayerPanel musicPlayerPanel;
         Playlist selectedPlaylistName = null;
 
-        public Playlists(AudioService audioService)
+        public Playlists(AudioService audioService, MusicPlayerPanel musicPlayerPanel)
         {
             this.audioService = audioService;
             this.DoubleBuffered = true;
-            //this.musicPlayerPanel = musicPlayerPanel;
+            this.musicPlayerPanel = musicPlayerPanel;
 
             string lastPlayedPlaylist = Settings.LastOpenedPlaylist;
 
@@ -34,7 +34,6 @@ namespace Mellow_Music_Player.UI.Forms
 
         public void LoadPlaylists()
         {
-            //MessageBox.Show(playlistLayoutPanel.Visible.ToString());
             List<Playlist> playlists = DatabaseService.GetPlaylists();
 
             foreach (var playlist in playlists)
@@ -200,7 +199,13 @@ namespace Mellow_Music_Player.UI.Forms
                 panelSongCard.Invalidate();
 
                 //musicPlayerPanel.ClearProgress();
-                //musicPlayerPanel.SetPlaying(true);
+                if (musicPlayerPanel == null)
+                {
+                    MessageBox.Show("Music Player Panel is null");
+                }
+
+                musicPlayerPanel.SetPlaying(true);
+                musicPlayerPanel.UpdatePlayPauseButton();
                 audioService.Play(s);
             };
 
