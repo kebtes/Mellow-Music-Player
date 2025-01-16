@@ -303,19 +303,19 @@ namespace Mellow_Music_Player.UI
 
         public async void LoadLyrics()
         {
-            if (audioService.GetCurrentSong() == null) return;
+            //if (audioService.GetCurrentSong() == null) return;
 
             textBox1.Clear();
             textBox1.Text = "Loading lyrics...";
             textBox1.TextAlign = HorizontalAlignment.Center;
             textBox1.ForeColor = ColorTranslator.FromHtml("#181B22");
 
-            Song song = audioService.GetCurrentSong();
-            string title = song.Title;
-            string artist = string.Join(", ", song.Artists);
-
             try
             {
+                Song song = audioService.GetCurrentSong();
+                string title = song.Title;
+                string artist = string.Join(", ", song.Artists);
+
                 var lyrics = await LyricsService.GetLyrics(title, artist);
                 textBox1.ForeColor = Color.White;
                 textBox1.TextAlign = HorizontalAlignment.Left;
@@ -334,6 +334,10 @@ namespace Mellow_Music_Player.UI
             textBox1.Text = "Error loading lyrics!";
             textBox1.TextAlign = HorizontalAlignment.Center;
             textBox1.ForeColor = ColorTranslator.FromHtml("#181B22");
+        }
+        public void SetMusicPlayerPanelInstance(MusicPlayerPanel musicPlayerPanel)
+        {
+            this.musicPlayerPanel = musicPlayerPanel;
         }
 
         private void toolStripLabel1_Click(object sender, EventArgs e)

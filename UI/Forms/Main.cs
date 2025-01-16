@@ -37,9 +37,12 @@ namespace Mellow_Music_Player.UI
 
             audioService = new AudioService();
             this.settings = settings;
-            this.musicPlayerPanel = new MusicPlayerPanel(audioService, this.settings, this.feed);
+            
+            this.musicPlayerPanel = new MusicPlayerPanel(audioService, settings, null);
+            this.feed = new panelFeed(audioService, this.musicPlayerPanel);
+            this.musicPlayerPanel.SetFeedPanel(this.feed);
+            //this.feed.SetMusicPlayerPanelInstance(musicPlayerPanel);
 
-            this.feed = new panelFeed(audioService, musicPlayerPanel);
 
             feedIcon = Image.FromFile(Constants.FeedIcon);
             feedSelectedIcon = Image.FromFile(Constants.FeedSelectedIcon);

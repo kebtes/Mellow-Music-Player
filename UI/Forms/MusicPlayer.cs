@@ -44,9 +44,6 @@ namespace Mellow_Music_Player.UI.Forms
             this.settings = settings;
             this.feed = panelFeed;
 
-            InitializeComponent();
-            InitializeTimer();
-
             songQueue = new SongQueue();
             bindingSource = new BindingSource();
             currentSong = songQueue.GetCurrentSong();
@@ -54,50 +51,59 @@ namespace Mellow_Music_Player.UI.Forms
             this.audioService = audioService;
             this.audioService.SetMusicPlayerInstance(this);
 
-            bindingSource.DataSource = currentSong;
+            InitializeComponent();
 
-            albumArtPanel.DataBindings.Clear();
-            musicTitleLabel.DataBindings.Clear();
-
-            Binding imageBinding = new Binding("BackgroundImage", bindingSource, "AlbumArt");
-
-            imageBinding.Format += (s, e) =>
+            if (currentSong != null)
             {
-                if (e.Value is Image originalImage)
+                bindingSource.DataSource = currentSong;
+
+                albumArtPanel.DataBindings.Clear();
+                musicTitleLabel.DataBindings.Clear();
+
+                Binding imageBinding = new Binding("BackgroundImage", bindingSource, "AlbumArt");
+                imageBinding.Format += (s, e) =>
                 {
-                    e.Value = ScaleImage.Scale(originalImage, this.albumArtPanel.Width, this.albumArtPanel.Height);
-                }
-            };
-            this.albumArtPanel.DataBindings.Add(imageBinding);
+                    if (e.Value is Image originalImage)
+                    {
+                        e.Value = ScaleImage.Scale(originalImage, this.albumArtPanel.Width, this.albumArtPanel.Height);
+                    }
+                };
+                this.albumArtPanel.DataBindings.Add(imageBinding);
 
-            Binding artistBinding = new Binding("Text", bindingSource, "Artists");
+                Binding artistBinding = new Binding("Text", bindingSource, "Artists");
+                artistBinding.Format += (s, e) =>
+                {
+                    if (e.Value is string[] artistArray)
+                    {
+                        e.Value = string.Join(", ", artistArray);
+                    }
+                };
 
-            artistBinding.Format += (s, e) =>
+                this.artistNameLabel.DataBindings.Add(artistBinding);
+                this.musicTitleLabel.DataBindings.Add("Text", bindingSource, "Title");
+
+                Binding totalTimeBinding = new Binding("Text", bindingSource, "Duration");
+                totalTimeBinding.Format += (s, e) =>
+                {
+                    if (e.Value is TimeSpan timeSpan)
+                    {
+                        e.Value = timeSpan.ToString(@"mm\:ss");
+                    }
+                };
+
+                this.totalTime.DataBindings.Add(totalTimeBinding);
+                UpdateHeart();
+            }
+            else
             {
-                if (e.Value is string[] artistArray)
-                {
-                    e.Value = string.Join(", ", artistArray);
-                }
-                
-            };
+                // Set default values when no song is loaded
+                this.albumArtPanel.BackgroundImage = null;
+                this.artistNameLabel.Text = "No Artist";
+                this.musicTitleLabel.Text = "No Song Selected";
+                this.totalTime.Text = "00:00";
+            }
 
-            this.artistNameLabel.DataBindings.Add(artistBinding);
-            this.musicTitleLabel.DataBindings.Add("Text", bindingSource, "Title");
-
-            Binding totalTimeBinding = new Binding("Text", bindingSource, "Duration");
-
-            totalTimeBinding.Format += (s, e) =>
-            {
-                if (e.Value is TimeSpan timeSpan)
-                {
-                    e.Value = timeSpan.ToString(@"mm\:ss");
-                }
-            };
-
-            this.totalTime.DataBindings.Add(totalTimeBinding);
-
-            UpdateHeart();     
-            
+            InitializeTimer();
         }
 
         private void UpdateHeart()
@@ -117,7 +123,7 @@ namespace Mellow_Music_Player.UI.Forms
             audioService.Next();
             //audioService.Play(false);
             playPauseButton.Refresh();
-            this.feed.LoadLyrics();
+            feed.LoadLyrics();
             UpdateHeart();
         }
 
@@ -132,7 +138,7 @@ namespace Mellow_Music_Player.UI.Forms
             audioService.Prev();
             //audioService.Play(false);
             playPauseButton.Refresh();
-            this.feed.LoadLyrics();
+            feed.LoadLyrics();
             UpdateHeart();
         }
 
@@ -145,7 +151,7 @@ namespace Mellow_Music_Player.UI.Forms
             SetProgressMaximum();
 
             playPauseButton.Refresh();
-            this.feed.LoadLyrics();
+            feed.LoadLyrics();
         }
 
         private void playPauseButton_MouseEnter(object sender, EventArgs e)
@@ -268,6 +274,11 @@ namespace Mellow_Music_Player.UI.Forms
             else DatabaseService.AddToPlaylist("Liked Songs", currentSong);
 
             UpdateHeart();
+        }
+
+        public void SetFeedPanel(panelFeed feed)
+        {
+            this.feed = feed;
         }
     }
 }
