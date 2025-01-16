@@ -70,7 +70,7 @@ namespace Mellow_Music_Player.Source.Services
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception("Error in GetLyrics", ex);
             }
 
         }

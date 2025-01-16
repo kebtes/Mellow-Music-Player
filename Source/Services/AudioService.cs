@@ -128,6 +128,10 @@ namespace Mellow_Music_Player.Source.Services
 
         public Song GetCurrentSong()
         {
+            if (currentSong == null)
+            {
+                currentSong = songQueue.GetCurrentSong();
+            }
             return currentSong;
         }
     }
