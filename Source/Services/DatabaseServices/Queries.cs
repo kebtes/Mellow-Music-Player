@@ -1,4 +1,6 @@
-﻿namespace Mellow_Music_Player.Source.Services.Database_Services
+﻿using System.Collections.Generic;
+
+namespace Mellow_Music_Player.Source.Services.Database_Services
 {
     internal class Queries
     {
@@ -45,13 +47,24 @@
          Queries to check if certain data exist
          */
         public static string CheckSongExists = @"SELECT EXISTS(SELECT 1 FROM Songs WHERE FilePath = @filePath)";
+        public static string CheckSongInPlaylist = @"SELECT 1 FROM PlaylistSongs WHERE PlaylistID = @playlistID AND SongID = @songID LIMIT 1 COLLATE NOCASE;";
 
         /*
          Data insertion and modification queries
          */
         public static string AddSong = @"
                             INSERT INTO Songs (Title, Artist, Album, Genre, Duration, FilePath)
-                            VALUES (@title, @artist, @album, @genre, @duration, @filePath);";
+                            VALUES (@title, @artist, @album, @genre, @duration, @filePath);"
+        ;
+        public static string CreatePlaylist = @"INSERT INTO Playlists (PlaylistName, PlaylistColor, CreatedAt)
+                            VALUES (@playlistName, @playlistColor, @currentTimeStamp)";
+
+        public static string InsertIntoPlaylist = @"INSERT OR IGNORE INTO PlaylistSongs (PlaylistID, SongID)
+                            VALUES (@playlistId, @songId);";
+
+        public static string RemoveFromPlaylist = @"DELETE FROM PlaylistSongs
+                            WHERE PlaylistID = @playlistID AND SongID = @songID;";
+
 
         //Table deletion queries
         public static string DeleteSongTable = "DELETE FROM Songs";
@@ -63,6 +76,18 @@
          */
         public static string GetSongs = "SELECT Title, Artist, Album, Genre, Duration, FilePath FROM Songs";
 
+        public static string GetPlaylistID = @"SELECT PlaylistID FROM Playlists
+                            WHERE PlaylistName = @playlistName COLLATE NOCASE;";
+
+        public static string GetPlayListSongsById = @"SELECT Songs.SongID, Songs.Title, Songs.Artist, Songs.Album, Songs.Genre, Songs.Duration, Songs.FilePath, Songs.AlbumArtPath
+                            FROM PlaylistSongs
+                            INNER JOIN Songs 
+                            ON PlaylistSongs.SongID = Songs.SongID
+                            WHERE PlaylistSongs.PlaylistID = @playlistID;";
+
+        public static string GetSongIdByFilePath = @"SELECT SongID FROM Songs WHERE FilePath = @filePath;";
+
+        public static string GetPlaylists = @"SELECT PlaylistID, PlaylistName, PlaylistColor, CreatedAt FROM Playlists;";
 
     }
 }
