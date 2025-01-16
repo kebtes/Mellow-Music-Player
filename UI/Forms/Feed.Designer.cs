@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Mellow_Music_Player.UI
 {
-    partial class panelFeed
+    partial class panelFeed : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -40,9 +40,10 @@ namespace Mellow_Music_Player.UI
             this.searchBoxImage = new System.Windows.Forms.Panel();
             this.searchBoxTextArea = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.scrollBar = new ReaLTaiizor.Controls.MaterialScrollBar();
             this.panel2 = new System.Windows.Forms.Panel();
             this.resultPanel = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.searchBoxImage.SuspendLayout();
             this.resultPanel.SuspendLayout();
             this.SuspendLayout();
@@ -122,20 +123,11 @@ namespace Mellow_Music_Player.UI
             // 
             // flowLayoutPanel
             // 
+            this.flowLayoutPanel.AutoScroll = true;
             this.flowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(561, 529);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(593, 567);
             this.flowLayoutPanel.TabIndex = 5;
-            // 
-            // scrollBar
-            // 
-            this.scrollBar.Depth = 0;
-            this.scrollBar.Location = new System.Drawing.Point(0, 0);
-            this.scrollBar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.scrollBar.Name = "scrollBar";
-            this.scrollBar.Orientation = ReaLTaiizor.Enum.Material.MateScrollOrientation.Vertical;
-            this.scrollBar.Size = new System.Drawing.Size(10, 200);
-            this.scrollBar.TabIndex = 0;
             // 
             // panel2
             // 
@@ -153,12 +145,40 @@ namespace Mellow_Music_Player.UI
             this.resultPanel.Size = new System.Drawing.Size(561, 529);
             this.resultPanel.TabIndex = 6;
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Geist", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.White;
+            this.textBox1.Location = new System.Drawing.Point(592, 147);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(366, 522);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Geist", 10F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(592, 117);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 21);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Lyrics";
+            // 
             // panelFeed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
             this.ClientSize = new System.Drawing.Size(876, 694);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.resultPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.searchBoxImage);
@@ -166,6 +186,7 @@ namespace Mellow_Music_Player.UI
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.labelMusic);
+            this.DoubleBuffered = true;
             this.Name = "panelFeed";
             this.Text = "Form1";
             this.searchBoxImage.ResumeLayout(false);
@@ -184,9 +205,10 @@ namespace Mellow_Music_Player.UI
         private System.Windows.Forms.Button buttonDirectory;
         private System.Windows.Forms.Panel searchBoxImage;
         private System.Windows.Forms.TextBox searchBoxTextArea;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
-        private ReaLTaiizor.Controls.MaterialScrollBar scrollBar;
         private Panel panel2;
         private Panel resultPanel;
+        private TextBox textBox1;
+        private Label label1;
+        private FlowLayoutPanel flowLayoutPanel;
     }
 }

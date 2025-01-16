@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-
+using System.Windows.Forms.VisualStyles;
 using Mellow_Music_Player.Source;
 using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source.Services.Database_Services;
@@ -15,34 +16,39 @@ namespace Mellow_Music_Player.UI
     {
         //private FileService fileService;
         private AudioService audioService;
+        //private MusicPlayerPanel musicPlayerPanel;
+        //private MusicPlayerPanel musicPlayerPanel;
         
         public panelFeed(AudioService audioService)
         {
             //fileService = new FileService();
             this.audioService = audioService;
+            //this.musicPlayerPanel = musicPlayerPanel;
+
             InitializeComponent();
             LoadSongs();
+            LoadLyrics();
         }
 
         /*
          Helper function to create a song card and add it to the parent component.
          */
+        private Panel currentlySelectedPanel = null;
+
         public void CreateSongCard(Song s, Panel parentComponent, Fields? fieldHighlight = null)
         {
             const int cardWidth = 723;
             const int cardHeight = 61;
 
             bool isHovered = false;
-            bool isSelected = false;
 
-            //Panel to hold the song
+            // Panel to hold the song
             Panel panelSongCard = new Panel
             {
                 Size = new Size(cardWidth, cardHeight),
                 BackColor = ColorTranslator.FromHtml(Constants.DarkBlue),
                 BorderStyle = BorderStyle.None,
                 ForeColor = Color.White
-
             };
 
             Label lblSongTitle = new Label
@@ -67,8 +73,7 @@ namespace Mellow_Music_Player.UI
             {
                 Size = new Size(45, 45),
                 Location = new Point(20, 8),
-                BackgroundImage = ScaleImage.Scale(s.AlbumArt),
-
+                BackgroundImage = ScaleImage.Scale(s.AlbumArt)
             };
 
             Button playButton = new Button
@@ -77,10 +82,29 @@ namespace Mellow_Music_Player.UI
                 BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonSmallIcon), 30, 30),
                 Location = new Point(500, 15),
             };
+            Button meatBallMenuButton = new Button
+            {
+                Size = new Size(25, 25),
+                BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.MeatballMenuIcon), 25, 25),
+                Location = new Point(530, 18),
+            };
 
             playButton.MouseClick += (sender, e) =>
             {
-                audioService.PlaySong(s);
+                // Deselect previously selected panel
+                if (currentlySelectedPanel != null)
+                {
+                    currentlySelectedPanel.BackColor = ColorTranslator.FromHtml(Constants.DarkBlue);
+                    currentlySelectedPanel.Invalidate(true);
+
+                }
+
+                currentlySelectedPanel = panelSongCard;
+                panelSongCard.BackColor = ColorTranslator.FromHtml(Constants.HoverBlue);
+                panelSongCard.Invalidate();
+
+                //musicPlayerPanel.ClearProgress();
+                audioService.Play(s);
             };
 
             playButton.MouseEnter += (sender, e) =>
@@ -93,22 +117,22 @@ namespace Mellow_Music_Player.UI
                 playButton.BackgroundImage = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonSmallIcon), 30, 30);
             };
 
-
             playButton.FlatStyle = FlatStyle.Flat;
             playButton.FlatAppearance.BorderSize = 0;
+            meatBallMenuButton.FlatStyle = FlatStyle.Flat;
+            meatBallMenuButton.FlatAppearance.BorderSize = 0;
 
             panelSongCard.MouseEnter += (sender, e) =>
             {
-                if (isSelected) return;
+                if (panelSongCard == currentlySelectedPanel) return;
 
                 isHovered = true;
                 panelSongCard.Invalidate();
-
             };
 
             panelSongCard.MouseLeave += (sender, e) =>
             {
-                if (isSelected) return;
+                if (panelSongCard == currentlySelectedPanel) return;
 
                 isHovered = false;
                 panelSongCard.Invalidate();
@@ -116,13 +140,22 @@ namespace Mellow_Music_Player.UI
 
             panelSongCard.MouseClick += (sender, e) =>
             {
-                isSelected = !isSelected;
+                // Deselect previously selected panel
+                if (currentlySelectedPanel != null)
+                {
+                    currentlySelectedPanel.BackColor = ColorTranslator.FromHtml(Constants.DarkBlue);
+                    currentlySelectedPanel.Invalidate(true);
+                    
+                }
+
+                currentlySelectedPanel = panelSongCard;
+                panelSongCard.BackColor = ColorTranslator.FromHtml(Constants.HoverBlue);
                 panelSongCard.Invalidate();
             };
 
             panelSongCard.Paint += (sender, e) =>
             {
-                if (isSelected)
+                if (panelSongCard == currentlySelectedPanel)
                 {
                     panelSongCard.BackColor = ColorTranslator.FromHtml(Constants.HoverBlue);
 
@@ -133,17 +166,19 @@ namespace Mellow_Music_Player.UI
                 }
                 else if (isHovered)
                 {
-                    //panelSongCard.BackColor = ColorTranslator.FromHtml(Constants.HoverBlue);
-                    using (Pen pen = new Pen(ColorTranslator.FromHtml(Constants.HoverGrey), Constants.HoverPenWidth))
-                    {
-                        e.Graphics.DrawLine(pen, 0, 0, 0, panelSongCard.Height);
-                    }
+                    //using (Pen pen = new Pen(ColorTranslator.FromHtml(Constants.HoverGrey), Constants.HoverPenWidth))
+                    //{
+                    //    e.Graphics.DrawLine(pen, 0, 0, 0, panelSongCard.Height);
+                    //}
+
+                    panelSongCard.BackColor = ColorTranslator.FromHtml(Constants.HoverGrey);
                 }
                 else
                 {
                     panelSongCard.BackColor = ColorTranslator.FromHtml(Constants.DarkBlue);
                 }
             };
+
 
             if (fieldHighlight.HasValue)
             {
@@ -164,10 +199,11 @@ namespace Mellow_Music_Player.UI
             panelSongCard.Controls.Add(lblArtist);
             panelSongCard.Controls.Add(panelAlbumArt);
             panelSongCard.Controls.Add(playButton);
+            panelSongCard.Controls.Add(meatBallMenuButton);
 
             parentComponent.Controls.Add(panelSongCard);
-
         }
+
         private void LoadSongs()
         {
             //Panel selectedCard = null;
@@ -219,6 +255,51 @@ namespace Mellow_Music_Player.UI
             }
 
          
+        }
+
+        public async void LoadLyrics()
+        {
+            if (audioService.GetCurrentSong() == null) return;
+
+            textBox1.Clear();
+            textBox1.Text = "Loading lyrics...";
+            textBox1.TextAlign = HorizontalAlignment.Center;
+            textBox1.ForeColor = ColorTranslator.FromHtml("#181B22");
+
+            Song song = audioService.GetCurrentSong();
+            string title = song.Title;
+            string artist = string.Join(", ", song.Artists);
+
+            try
+            {
+                var lyrics = await LyricsService.GetLyrics(title, artist);
+                textBox1.ForeColor = Color.White;
+                textBox1.TextAlign = HorizontalAlignment.Left;
+                textBox1.Text = string.Join(Environment.NewLine, lyrics);
+            }
+            catch (Exception ex)
+            {
+                ErrorLoadingLyrics();
+                return;
+            }
+        }
+
+        public void ErrorLoadingLyrics()
+        {
+            textBox1.Clear();
+            textBox1.Text = "Error loading lyrics!";
+            textBox1.TextAlign = HorizontalAlignment.Center;
+            textBox1.ForeColor = ColorTranslator.FromHtml("#181B22");
+        }
+
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
