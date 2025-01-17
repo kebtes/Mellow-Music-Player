@@ -97,5 +97,9 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
         public static string GetLyrics = @"SELECT Lyrics
                             FROM SongLyrics
                             WHERE SongID == @songId;";
+
+        public static string GetAlbumSongs = @"SELECT Title, Artist, Album, Genre, Duration, FilePath
+                            FROM Songs
+                            WHERE Album = @albumTitle COLLATE NOCASE;";
     }
 }

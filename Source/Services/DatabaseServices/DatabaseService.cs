@@ -530,6 +530,42 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
 
             return lyrics;
         }
+
+        public static List<Song> GetAlbumSongs(string albumTitle)
+        {
+            var albumSongs = new List<Song>();
+
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                using (SQLiteCommand cmd = new SQLiteCommand(Queries.GetAlbumSongs, connection))
+                {
+                    cmd.Parameters.AddWithValue("@albumTitle", albumTitle);
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string filePath = reader.GetString(5);
+                            Song song = new Song();
+
+                            song.Title = reader.GetString(0);
+                            song.Artists = reader.GetString(1).Split(' ');
+                            song.Album = reader.GetString(2);
+                            song.Genres = reader.GetString(3).Split(' ');
+                            song.Duration = TimeSpan.FromSeconds(reader.GetDouble(4));
+
+                            song.FilePath = filePath;
+                            song.AlbumArt = FileService.GetAlbumArt(filePath);
+
+                            albumSongs.Add(song);
+                        }
+                    }
+                }
+            }
+
+            return albumSongs;
+        }
     }
 
 }
