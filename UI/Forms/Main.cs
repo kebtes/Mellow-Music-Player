@@ -26,19 +26,19 @@ namespace Mellow_Music_Player.UI
         private Image playlistSelectedIcon;
 
         public AudioService audioService;
-        public Settings settings;
+        //public Settings settings;
         private panelFeed feed;
 
         public MusicPlayerPanel musicPlayerPanel;
 
-        public Main(Settings settings)
+        public Main()
         {
             InitializeComponent();
 
             audioService = new AudioService();
-            this.settings = settings;
+            //this.settings = settings;
             
-            this.musicPlayerPanel = new MusicPlayerPanel(audioService, settings, null);
+            this.musicPlayerPanel = new MusicPlayerPanel(audioService, null);
             this.feed = new panelFeed(audioService, this.musicPlayerPanel);
             this.musicPlayerPanel.SetFeedPanel(this.feed);
             //this.feed.SetMusicPlayerPanelInstance(musicPlayerPanel);

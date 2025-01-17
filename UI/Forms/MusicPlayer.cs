@@ -15,7 +15,7 @@ namespace Mellow_Music_Player.UI.Forms
         private Song currentSong;
         private BindingSource bindingSource;
         private AudioService audioService;
-        private Settings settings;
+        //private Settings settings;
         private TimeSpan songCurrentTime = TimeSpan.Zero;
         private panelFeed feed;
 
@@ -38,9 +38,9 @@ namespace Mellow_Music_Player.UI.Forms
         }
 
 
-        public MusicPlayerPanel(AudioService audioService, Settings settings, panelFeed panelFeed)
+        public MusicPlayerPanel(AudioService audioService, panelFeed panelFeed)
         {
-            this.settings = settings;
+            //this.settings = settings;
             this.feed = panelFeed;
 
             songQueue = new SongQueue();
