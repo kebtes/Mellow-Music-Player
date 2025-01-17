@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 
 namespace Mellow_Music_Player.Source.Services
 {
     public static class FileService
     {
-        private static string directory = Settings.SongsDirectory;
-        private static List<Song> songs = new List<Song>();
+        private static string directory;
+        private static List<Song> songs ;
 
         private static string[] audioFiles;
 
@@ -19,6 +20,14 @@ namespace Mellow_Music_Player.Source.Services
         {
             try
             {
+                songs = new List<Song>();
+                directory = Settings.SongsDirectory;
+
+                if (directory == null)
+                {
+                    return;
+                }
+
                 audioFiles = Directory.GetFiles(directory, "*.mp3", SearchOption.TopDirectoryOnly);
             }
             catch (FileNotFoundException e)
