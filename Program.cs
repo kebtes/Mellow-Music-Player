@@ -11,7 +11,6 @@ namespace Mellow_Music_Player
 {
     internal static class Program
     {
-        public static Settings settings;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -23,12 +22,10 @@ namespace Mellow_Music_Player
 
             DatabaseService.InitializeDatabase();
             FileService.Refresh();
-
-            settings = new Settings();
                
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main(settings));
+            Application.Run(new Main());
         }
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
