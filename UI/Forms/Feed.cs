@@ -90,7 +90,6 @@ namespace Mellow_Music_Player.UI
                 Location = new Point(530, 18),
             };
 
-            // TODO - Fetch the playlists from db here
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
             List<Playlist> playlists = DatabaseService.GetPlaylists();
             playlists.ForEach(p =>
@@ -145,6 +144,7 @@ namespace Mellow_Music_Player.UI
                 musicPlayerPanel.SetPlaying(true);
                 musicPlayerPanel.UpdatePlayPauseButton();
                 audioService.Play(s);
+                LoadLyrics();
             };
 
             playButton.MouseEnter += (sender, e) =>
@@ -303,39 +303,140 @@ namespace Mellow_Music_Player.UI
          
         }
 
-        public async void LoadLyrics()
+        public void LoadLyrics()
         {
             //if (audioService.GetCurrentSong() == null) return;
 
-            textBox1.Clear();
-            textBox1.Text = "Loading lyrics...";
-            textBox1.TextAlign = HorizontalAlignment.Center;
-            textBox1.ForeColor = ColorTranslator.FromHtml("#181B22");
-
-            try
+            bool lyricsExist = DatabaseService.CheckLyricsExist(audioService.GetCurrentSong());
+            
+            if (lyricsExist)
             {
-                Song song = audioService.GetCurrentSong();
-                string title = song.Title;
-                string artist = string.Join(", ", song.Artists);
+                try
+                {
+                    rightSidePanel.Controls.Clear();
 
-                var lyrics = await LyricsService.GetLyrics(title, artist);
-                textBox1.ForeColor = Color.White;
-                textBox1.TextAlign = HorizontalAlignment.Left;
-                textBox1.Text = string.Join(Environment.NewLine, lyrics);
+                    TextBox lyricsTextBox = new TextBox()
+                    {
+                        Text = "Loading lyrics...",
+                        ForeColor = ColorTranslator.FromHtml("#181B22"),
+                        //Dock = DockStyle.Fill,
+                        Size = new Size(rightSidePanel.Width + 25, rightSidePanel.Height),
+                        Multiline = true,
+                        BackColor = ColorTranslator.FromHtml(Constants.DarkBlue),
+                        Font = new Font(Constants.ProjectFont, 9, FontStyle.Regular),
+                        BorderStyle = BorderStyle.None,
+                    };
+                    lyricsTextBox.ScrollBars = ScrollBars.Both;
+                    
+                    Song song = audioService.GetCurrentSong();
+
+                    var lyrics = DatabaseService.GetSongLyrics(song);
+                    lyricsTextBox.ForeColor = Color.White;
+                    lyricsTextBox.TextAlign = HorizontalAlignment.Left;
+                    lyricsTextBox.Text = lyrics;
+
+                    rightSidePanel.Controls.Add(lyricsTextBox);
+                }
+                catch (Exception)
+                {
+                    ErrorLoadingLyrics();
+                    return;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                ErrorLoadingLyrics();
-                return;
+                DownloadSongLyricsPrompt();
             }
         }
 
+        public void RemoveHighlight()
+        {
+            if (currentlySelectedPanel != null)
+            {
+                currentlySelectedPanel.BackColor = ColorTranslator.FromHtml(Constants.DarkBlue);
+                currentlySelectedPanel.Invalidate(true);
+            }
+        }
+
+        public void DownloadSongLyricsPrompt()
+        {
+            rightSidePanel.Controls.Clear();
+
+            Button downloadButton = new Button
+            {
+                Size = new Size(23, 23),
+                Image = Image.FromFile(Constants.DownloadIcon),
+                Location = new Point(130, 252),
+                FlatAppearance = { BorderSize = 0 },
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand
+            };
+
+            Label promptText = new Label
+            {
+                Text = "Click here to download lyrics",
+                Size = new Size(210, 16),
+                Location = new Point(48, 278),
+                ForeColor = Color.White,
+                Font = new Font(Constants.ProjectFont, 8, FontStyle.Regular)
+            };
+
+            downloadButton.MouseEnter += (sender, e) =>
+            {
+                downloadButton.Image = Image.FromFile(Constants.DownloadSelectedIcon);
+            };
+            downloadButton.MouseLeave += (sender, e) =>
+            {
+                downloadButton.Image = Image.FromFile(Constants.DownloadIcon);
+            };
+            
+            downloadButton.Click += async (sender, e) =>
+            {
+                downloadButton.Visible = false;
+                promptText.Text = "Downloading lyrics...";
+                promptText.Location = new Point(80, 252);
+                try
+                {
+                    await LyricsService.GetLyrics(audioService.GetCurrentSong());
+                    LoadLyrics();
+                }
+                catch (Exception)
+                {
+                    ErrorLoadingLyrics();
+                    return;
+                }
+            };
+
+            rightSidePanel.Controls.Add(downloadButton);
+            rightSidePanel.Controls.Add(promptText);
+        }
+
+
         public void ErrorLoadingLyrics()
         {
-            textBox1.Clear();
-            textBox1.Text = "Error loading lyrics!";
-            textBox1.TextAlign = HorizontalAlignment.Center;
-            textBox1.ForeColor = ColorTranslator.FromHtml("#181B22");
+            rightSidePanel.Controls.Clear();
+
+            Button errorButton = new Button
+            {
+                Size = new Size(23, 23),
+                Image = Image.FromFile(Constants.ErrorIcon),
+                Location = new Point(130, 252),
+                FlatAppearance = { BorderSize = 0 },
+                FlatStyle = FlatStyle.Flat,
+                Cursor = Cursors.Hand
+            };
+
+            Label promptText = new Label
+            {
+                Text = "Error loading lyrics, try again later",
+                Size = new Size(210, 16),
+                Location = new Point(47, 278),
+                ForeColor = Color.White,
+                Font = new Font(Constants.ProjectFont, 8, FontStyle.Regular)
+            };
+
+            rightSidePanel.Controls.Add(errorButton);
+            rightSidePanel.Controls.Add(promptText);
         }
         public void SetMusicPlayerPanelInstance(MusicPlayerPanel musicPlayerPanel)
         {

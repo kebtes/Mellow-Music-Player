@@ -41,10 +41,10 @@ namespace Mellow_Music_Player.UI
             this.searchBoxTextArea = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.resultPanel = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.resultPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.rightSidePanel = new System.Windows.Forms.Panel();
             this.searchBoxImage.SuspendLayout();
             this.panel2.SuspendLayout();
             this.resultPanel.SuspendLayout();
@@ -140,6 +140,14 @@ namespace Mellow_Music_Player.UI
             this.panel2.Size = new System.Drawing.Size(2, 540);
             this.panel2.TabIndex = 2;
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(2, 540);
+            this.panel3.TabIndex = 3;
+            // 
             // resultPanel
             // 
             this.resultPanel.Controls.Add(this.flowLayoutPanel);
@@ -147,22 +155,6 @@ namespace Mellow_Music_Player.UI
             this.resultPanel.Name = "resultPanel";
             this.resultPanel.Size = new System.Drawing.Size(561, 529);
             this.resultPanel.TabIndex = 6;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Geist", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(592, 147);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(366, 522);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -175,13 +167,12 @@ namespace Mellow_Music_Player.UI
             this.label1.TabIndex = 8;
             this.label1.Text = "Lyrics";
             // 
-            // panel3
+            // rightSidePanel
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(2, 540);
-            this.panel3.TabIndex = 3;
+            this.rightSidePanel.Location = new System.Drawing.Point(595, 146);
+            this.rightSidePanel.Name = "rightSidePanel";
+            this.rightSidePanel.Size = new System.Drawing.Size(284, 536);
+            this.rightSidePanel.TabIndex = 9;
             // 
             // panelFeed
             // 
@@ -189,7 +180,7 @@ namespace Mellow_Music_Player.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
             this.ClientSize = new System.Drawing.Size(876, 694);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.rightSidePanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.resultPanel);
             this.Controls.Add(this.panel2);
@@ -220,9 +211,9 @@ namespace Mellow_Music_Player.UI
         private System.Windows.Forms.TextBox searchBoxTextArea;
         private Panel panel2;
         private Panel resultPanel;
-        private TextBox textBox1;
         private Label label1;
         private FlowLayoutPanel flowLayoutPanel;
         private Panel panel3;
+        private Panel rightSidePanel;
     }
 }
