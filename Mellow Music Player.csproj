@@ -144,6 +144,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
       <Private>True</Private>
@@ -297,6 +298,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Models\Album.cs" />
     <Compile Include="Source\Models\Playlist.cs" />
     <Compile Include="Source\Models\SongQueue.cs" />
     <Compile Include="Source\ScaleImage.cs" />
@@ -329,6 +331,12 @@
     </Compile>
     <Compile Include="UI\Forms\MusicPlayer.Designer.cs">
       <DependentUpon>MusicPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\Page.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Page.Designer.cs">
+      <DependentUpon>Page.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\Playlists.cs">
       <SubType>Form</SubType>
@@ -419,6 +427,9 @@
     </Compile>
     <EmbeddedResource Include="UI\Forms\MusicPlayer.resx">
       <DependentUpon>MusicPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Page.resx">
+      <DependentUpon>Page.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Playlists.resx">
       <DependentUpon>Playlists.cs</DependentUpon>
