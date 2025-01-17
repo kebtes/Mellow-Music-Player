@@ -82,6 +82,7 @@ namespace Mellow_Music_Player.UI.Forms
 
                 
                 }
+                playlistName.Text = playlist.PlaylistName;
                 selectedPlaylistName = playlist;
                 selectedPlaylistLabel = playlistNameLabel;
                 selectedPlaylistLabel.Font = new Font(Constants.ProjectFont, 8, FontStyle.Bold | FontStyle.Underline);

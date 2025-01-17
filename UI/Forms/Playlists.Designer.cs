@@ -36,6 +36,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.verticalSeparator = new System.Windows.Forms.Panel();
             this.songLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.playlistLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             this.songLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -66,9 +67,9 @@ namespace Mellow_Music_Player.UI.Forms
             this.playlistName.ForeColor = System.Drawing.Color.White;
             this.playlistName.Location = new System.Drawing.Point(12, 101);
             this.playlistName.Name = "playlistName";
-            this.playlistName.Size = new System.Drawing.Size(196, 38);
+            this.playlistName.Size = new System.Drawing.Size(218, 38);
             this.playlistName.TabIndex = 1;
-            this.playlistName.Text = "Liked Songs";
+            this.playlistName.Text = "Your Playlists";
             // 
             // verticalSeparator
             // 
@@ -91,9 +92,16 @@ namespace Mellow_Music_Player.UI.Forms
             this.playlistLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.playlistLayoutPanel.Location = new System.Drawing.Point(595, 150);
             this.playlistLayoutPanel.Name = "playlistLayoutPanel";
-            this.playlistLayoutPanel.Size = new System.Drawing.Size(269, 532);
+            this.playlistLayoutPanel.Size = new System.Drawing.Size(269, 459);
             this.playlistLayoutPanel.TabIndex = 5;
             this.playlistLayoutPanel.WrapContents = false;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.TabIndex = 0;
             // 
             // Playlists
             // 
@@ -101,6 +109,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
             this.ClientSize = new System.Drawing.Size(876, 694);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.playlistLayoutPanel);
             this.Controls.Add(this.songLayoutPanel);
             this.Controls.Add(this.verticalSeparator);
@@ -108,7 +117,9 @@ namespace Mellow_Music_Player.UI.Forms
             this.Controls.Add(this.separator);
             this.DoubleBuffered = true;
             this.Name = "Playlists";
+            this.ShowIcon = false;
             this.Text = "Playlists";
+            this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.songLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -122,5 +133,6 @@ namespace Mellow_Music_Player.UI.Forms
         private System.Windows.Forms.Panel verticalSeparator;
         private System.Windows.Forms.FlowLayoutPanel songLayoutPanel;
         private System.Windows.Forms.FlowLayoutPanel playlistLayoutPanel;
+        private Label label2;
     }
 }
