@@ -41,6 +41,9 @@ namespace Mellow_Music_Player.UI
         public static string AddIconSelected = Path.Combine(Application.StartupPath, "Assets", "Icons", "Add-Selected.png");
         public static string HeartIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Heart.png");
         public static string HeartIconSelected = Path.Combine(Application.StartupPath, "Assets", "Icons", "Heart-Selected.png");
+        public static string DownloadIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Download.png");
+        public static string DownloadSelectedIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Download-Selected.png");
+        public static string ErrorIcon = Path.Combine(Application.StartupPath, "Assets", "Icons", "Error.png");
 
         //Component locations
         public static string PlaylistCardRed = Path.Combine(Application.StartupPath, "Assets", "Components", "PlaylistRectangle_Red.png");
