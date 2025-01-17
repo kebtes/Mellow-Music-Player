@@ -217,6 +217,7 @@ namespace Mellow_Music_Player.UI.Forms
             // 
             // heartButton
             // 
+            this.heartButton.BackColor = System.Drawing.Color.Transparent;
             this.heartButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.heartButton.FlatAppearance.BorderSize = 0;
             this.heartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -224,7 +225,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.heartButton.Name = "heartButton";
             this.heartButton.Size = new System.Drawing.Size(23, 23);
             this.heartButton.TabIndex = 15;
-            this.heartButton.UseVisualStyleBackColor = true;
+            this.heartButton.UseVisualStyleBackColor = false;
             this.heartButton.Click += new System.EventHandler(this.heartButton_Click);
             // 
             // MusicPlayerPanel

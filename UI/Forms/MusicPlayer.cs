@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source.Models;
 using Mellow_Music_Player.Source;
-using ReaLTaiizor.Manager;
 using Mellow_Music_Player.Source.Services.Database_Services;
 
 namespace Mellow_Music_Player.UI.Forms
@@ -96,7 +95,7 @@ namespace Mellow_Music_Player.UI.Forms
             }
             else
             {
-                // Set default values when no song is loaded
+                // default values when no song is loaded
                 this.albumArtPanel.BackgroundImage = null;
                 this.artistNameLabel.Text = "No Artist";
                 this.musicTitleLabel.Text = "No Song Selected";
@@ -109,7 +108,15 @@ namespace Mellow_Music_Player.UI.Forms
         private void UpdateHeart()
         {
             bool likedSong = DatabaseService.IsSongInPlaylist("Liked Songs", currentSong);
-            this.heartButton.Image = likedSong ? Image.FromFile(Constants.HeartIconSelected) : Image.FromFile(Constants.HeartIcon);
+
+            if (likedSong)
+            {
+                heartButton.Image = Image.FromFile(Constants.HeartIconSelected);
+            }
+            else
+            {
+                heartButton.Image = Image.FromFile(Constants.HeartIcon);
+            }
         }
 
         private void nextButton_Click(object sender, EventArgs e)
@@ -125,6 +132,7 @@ namespace Mellow_Music_Player.UI.Forms
             UpdatePlayPauseButton();
             feed.LoadLyrics();
             UpdateHeart();
+            feed.RemoveHighlight();
         }
 
         private void prevButton_Click(object sender, EventArgs e)
@@ -140,6 +148,7 @@ namespace Mellow_Music_Player.UI.Forms
             UpdatePlayPauseButton();
             feed.LoadLyrics();
             UpdateHeart();
+            feed.RemoveHighlight();
         }
 
         private void playPauseButton_Click(object sender, EventArgs e)
