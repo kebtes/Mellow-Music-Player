@@ -92,6 +92,7 @@ namespace Mellow_Music_Player.UI
             this.buttonDirectory.Size = new System.Drawing.Size(27, 23);
             this.buttonDirectory.TabIndex = 3;
             this.buttonDirectory.UseVisualStyleBackColor = true;
+            this.buttonDirectory.Click += new System.EventHandler(this.buttonDirectory_Click);
             // 
             // searchBoxImage
             // 

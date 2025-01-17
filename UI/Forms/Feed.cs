@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,6 +10,7 @@ using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source.Services.Database_Services;
 using Mellow_Music_Player.Source.Services.DatabaseServices;
 using Mellow_Music_Player.UI.Forms;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace Mellow_Music_Player.UI
 {
@@ -68,6 +70,15 @@ namespace Mellow_Music_Player.UI
                 Font = new Font(Constants.ProjectFont, 5, FontStyle.Regular),
                 ForeColor = Color.White,
                 Location = new Point(74, 36)
+            };
+
+            Label lblAlbum = new Label()
+            {
+                Text = s.Album,
+                Size = new Size(193, 20),
+                Font = new Font(Constants.ProjectFont, 7, FontStyle.Regular),
+                ForeColor = Color.White,
+                Location = new Point((int) parentComponent.Width / 2, 22)
             };
 
             Panel panelAlbumArt = new Panel
@@ -246,6 +257,7 @@ namespace Mellow_Music_Player.UI
             panelSongCard.Controls.Add(panelAlbumArt);
             panelSongCard.Controls.Add(playButton);
             panelSongCard.Controls.Add(addToPlaylistBtn);
+            panelSongCard.Controls.Add(lblAlbum);
 
             parentComponent.Controls.Add(panelSongCard);
         }
@@ -253,6 +265,7 @@ namespace Mellow_Music_Player.UI
         private void LoadSongs()
         {
             //Panel selectedCard = null;
+            flowLayoutPanel.Controls.Clear();
 
             DatabaseService.GetSongs().ForEach(s =>
             {
@@ -451,6 +464,27 @@ namespace Mellow_Music_Player.UI
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonDirectory_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog folderBrowser = new FolderBrowserDialog())
+            {
+                folderBrowser.Description = "Select the directory where your music is stored";
+                folderBrowser.SelectedPath = "C:\\Users\\CompUser\\Music";
+                
+                if (folderBrowser.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFolder = folderBrowser.SelectedPath;
+
+                    Settings.SongsDirectory = selectedFolder;
+                    
+                    FileService.Refresh();
+
+                    LoadSongs();
+                    LoadLyrics();
+                }
+            }
         }
     }
 }
