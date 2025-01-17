@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mellow_Music_Player.Source.Services.Database_Services;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -60,13 +61,19 @@ namespace Mellow_Music_Player.Source.Services
             return output;
         }
 
-        public static async Task<List<string>> GetLyrics(string artist, string title)
+        public static async Task<bool> GetLyrics(Song song)
         {
+            //Fetches the desired lyrics and saves it in the Database
+
             try
             {
-                var response = await Fetch(title, artist);
+                string title = song.Title;
+                string artists = string.Join(",", song.Artists);
+
+                var response = await Fetch(title, artists);
                 var lyrics = Parse(response);
-                return lyrics;
+                DatabaseService.AddSongLyrics(song, string.Join(Environment.NewLine, lyrics));
+                return true;
             }
             catch (Exception ex)
             {
