@@ -10,7 +10,6 @@ using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source.Services.Database_Services;
 using Mellow_Music_Player.Source.Services.DatabaseServices;
 using Mellow_Music_Player.UI.Forms;
-using Microsoft.VisualBasic.ApplicationServices;
 
 namespace Mellow_Music_Player.UI
 {
@@ -19,12 +18,15 @@ namespace Mellow_Music_Player.UI
         //private FileService fileService;
         private AudioService audioService;
         private MusicPlayerPanel musicPlayerPanel;
+        private Main mainUi;
         //private MusicPlayerPanel musicPlayerPanel;
 
-        public panelFeed(AudioService audioService, MusicPlayerPanel musicPlayerPanel)
+        public panelFeed(AudioService audioService, MusicPlayerPanel musicPlayerPanel, Main mainUi)
         {
             //fileService = new FileService();
             this.DoubleBuffered = true;
+
+            this.mainUi = mainUi;
             this.audioService = audioService;
             this.musicPlayerPanel = musicPlayerPanel;
 
@@ -78,7 +80,8 @@ namespace Mellow_Music_Player.UI
                 Size = new Size(193, 20),
                 Font = new Font(Constants.ProjectFont, 7, FontStyle.Regular),
                 ForeColor = Color.White,
-                Location = new Point((int) parentComponent.Width / 2, 22)
+                Location = new Point((int)parentComponent.Width / 2, 22),
+                Cursor = Cursors.Hand
             };
 
             Panel panelAlbumArt = new Panel
@@ -176,6 +179,29 @@ namespace Mellow_Music_Player.UI
             addToPlaylistBtn.Click += (sender, e) =>
             {
                 contextMenuStrip.Show(addToPlaylistBtn, new Point(0, addToPlaylistBtn.Height));
+            };
+
+            lblAlbum.MouseEnter += (sender, e) =>
+            {
+                lblAlbum.Font = new Font(Constants.ProjectFont, 7, FontStyle.Regular | FontStyle.Underline);
+            };
+
+            lblAlbum.MouseLeave += (sender, e) =>
+            {
+                lblAlbum.Font = new Font(Constants.ProjectFont, 7, FontStyle.Regular);
+            };
+
+            lblAlbum.Click += (sender, e) =>
+            {
+                Album album = new Album
+                {
+                    AlbumName = s.Album,
+                    AlbumArt = s.AlbumArt,
+                    Artists = string.Join(" ", s.Artists)
+                };
+
+                album.Songs = DatabaseService.GetAlbumSongs(album.AlbumName);
+                mainUi.LoadPage(new Page(album, musicPlayerPanel, audioService, this));
             };
 
 

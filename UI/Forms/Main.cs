@@ -39,7 +39,7 @@ namespace Mellow_Music_Player.UI
             //this.settings = settings;
             
             this.musicPlayerPanel = new MusicPlayerPanel(audioService, null);
-            this.feed = new panelFeed(audioService, this.musicPlayerPanel);
+            this.feed = new panelFeed(audioService, this.musicPlayerPanel, this);
             this.musicPlayerPanel.SetFeedPanel(this.feed);
             //this.feed.SetMusicPlayerPanelInstance(musicPlayerPanel);
 
@@ -132,7 +132,7 @@ namespace Mellow_Music_Player.UI
         {
             if (!isBtnFeedSelected)
             {
-                LoadPage(new panelFeed(audioService, musicPlayerPanel));
+                LoadPage(new panelFeed(audioService, musicPlayerPanel, this));
                 isBtnFeedSelected = true;
                 isBtnPlaylistSelected = false;
                 UpdateButtonStates();
