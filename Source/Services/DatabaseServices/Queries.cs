@@ -48,6 +48,7 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
          */
         public static string CheckSongExists = @"SELECT EXISTS(SELECT 1 FROM Songs WHERE FilePath = @filePath)";
         public static string CheckSongInPlaylist = @"SELECT 1 FROM PlaylistSongs WHERE PlaylistID = @playlistID AND SongID = @songID LIMIT 1 COLLATE NOCASE;";
+        public static string CheckSongLyrics = @"SELECT 1 FROM SongLyrics WHERE SongID == @songId";
 
         /*
          Data insertion and modification queries
@@ -65,6 +66,10 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
         public static string RemoveFromPlaylist = @"DELETE FROM PlaylistSongs
                             WHERE PlaylistID = @playlistID AND SongID = @songID;";
 
+        public static string AddLyrics = @"INSERT INTO SongLyrics(SongID, Lyrics)
+                            VALUES(@songId, @lyrics);";
+
+        
 
         //Table deletion queries
         public static string DeleteSongTable = "DELETE FROM Songs";
@@ -89,5 +94,8 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
 
         public static string GetPlaylists = @"SELECT PlaylistID, PlaylistName, PlaylistColor, CreatedAt FROM Playlists;";
 
+        public static string GetLyrics = @"SELECT Lyrics
+                            FROM SongLyrics
+                            WHERE SongID == @songId;";
     }
 }

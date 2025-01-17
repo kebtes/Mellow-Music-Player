@@ -16,7 +16,6 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
         public static void InitializeDatabase()
         {
             string dbFilePath = Constant.DBFilePath;
-            //MessageBox.Show(File.Exists(dbFilePath).ToString());
 
             if (!File.Exists(dbFilePath))
             {
@@ -318,19 +317,19 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
                                     {
                                         var bin = file.Tag.Pictures[0].Data.Data;
                                         using (MemoryStream ms = new MemoryStream(bin))
-                                        { 
+                                        {
                                             song.AlbumArt = Image.FromStream(ms);
                                         }
                                     }
                                     else
                                     {
-                                        song.AlbumArt = null; 
+                                        song.AlbumArt = null;
                                     }
                                 }
 
                                 playlistSongs.Add(song);
-                                   
-                                
+
+
                             }
                         }
                     }
@@ -447,6 +446,90 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
             }
         }
 
+        public static bool CheckLyricsExist(Song song)
+        {
+            int songId = GetSongId(song.FilePath);
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(Queries.CheckSongLyrics, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@songId", songId);
+                        return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+                    }
+                }
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return false;
+        }
+
+        public static void AddSongLyrics(Song song, string lyrics)
+        {
+            int songId = GetSongId(song.FilePath);
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(Queries.AddLyrics, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@songId", songId);
+                        cmd.Parameters.AddWithValue("@lyrics", lyrics);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+        }
+
+        public static string GetSongLyrics(Song song)
+        {
+            int songId = GetSongId(song.FilePath);
+            string lyrics = "";
+
+            try
+            {
+                using(SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand cmd  = new SQLiteCommand(Queries.GetLyrics, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@songId", songId);
+                        lyrics = cmd.ExecuteScalar().ToString();
+                    }
+                }
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+
+            return lyrics;
+        }
     }
 
 }
