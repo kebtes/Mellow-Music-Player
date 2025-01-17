@@ -1,12 +1,11 @@
 ﻿namespace Mellow_Music_Player.Source
 {
-    public class Settings
+    public static class Settings
     {
-        private static string songsDirectory = "C:\\Users\\CompUser\\Mellow-Music-Player\\Sample";
+        //private static string songsDirectory = "C:\\Users\\CompUser\\Mellow-Music-Player\\Sample";
+        private static string songsDirectory;
         private static float volume = 1.0f;
         private static string lastOpenedPlaylist = null;
-
-        public Settings() { }
         public static float Volume
         {
             get => volume;
@@ -21,6 +20,7 @@
 
         public static string SongsDirectory
         {
+            set { songsDirectory = value; }
             get => songsDirectory;
         }
 
