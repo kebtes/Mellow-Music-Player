@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using DotNetEnv;
 
 namespace Mellow_Music_Player.Source.Services
 {
@@ -12,10 +12,12 @@ namespace Mellow_Music_Player.Source.Services
     {
         private static async Task<string> Fetch(string songTitle, string artist)
         {
+            Env.Load();
+
             string baseUrl = "https://musixmatch-lyrics-songs.p.rapidapi.com/songs/lyrics";
             string uriString = $"{baseUrl}?t={Uri.EscapeDataString(songTitle)}&a={Uri.EscapeDataString(artist)}&d=0&type=text";
 
-            string RapidApiKey = "55f5b01849msh8882a0a3568208bp12c558jsn91672897a5d0";
+            string RapidApiKey = Environment.GetEnvironmentVariable("RAPID_API_KEY");
             string RapidApiHost = "musixmatch-lyrics-songs.p.rapidapi.com";
 
             var client = new HttpClient();
