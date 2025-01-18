@@ -177,9 +177,9 @@ namespace Mellow_Music_Player.UI.Forms
             this.volumeTrackBar.Text = "dungeonTrackBar1";
             this.volumeTrackBar.ThumbBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(95)))), ((int)(((byte)(27)))));
             this.volumeTrackBar.ThumbBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(95)))), ((int)(((byte)(27)))));
-            this.volumeTrackBar.Value = 60;
+            this.volumeTrackBar.Value = 100;
             this.volumeTrackBar.ValueDivison = ReaLTaiizor.Controls.DungeonTrackBar.ValueDivisor.By1;
-            this.volumeTrackBar.ValueToSet = 60F;
+            this.volumeTrackBar.ValueToSet = 100F;
             this.volumeTrackBar.ValueChanged += new ReaLTaiizor.Controls.DungeonTrackBar.ValueChangedEventHandler(this.volumeTrackBar_ValueChanged);
             // 
             // button1
