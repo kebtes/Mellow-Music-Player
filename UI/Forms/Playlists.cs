@@ -9,7 +9,6 @@ using Mellow_Music_Player.Source.Services;
 using Mellow_Music_Player.Source;
 using Mellow_Music_Player.Source.Services.DatabaseServices;
 
-
 namespace Mellow_Music_Player.UI.Forms
 {
     public partial class Playlists : Form
@@ -34,6 +33,8 @@ namespace Mellow_Music_Player.UI.Forms
 
         public void LoadPlaylists()
         {
+            playlistLayoutPanel.Controls.Clear();
+
             List<Playlist> playlists = DatabaseService.GetPlaylists();
 
             foreach (var playlist in playlists)
@@ -87,6 +88,9 @@ namespace Mellow_Music_Player.UI.Forms
                 selectedPlaylistLabel = playlistNameLabel;
                 selectedPlaylistLabel.Font = new Font(Constants.ProjectFont, 8, FontStyle.Bold | FontStyle.Underline);
                 selectedPlaylistLabel.ForeColor = ColorTranslator.FromHtml(Constants.OrangeColor);
+                playlistCreatedDate.Text = $"Created at : {playlist.CreatedAt.ToString()}";
+
+                deletePlaylistLbl.Visible = true;
 
                 LoadPlaylistSongs(playlist);
             };
@@ -310,5 +314,58 @@ namespace Mellow_Music_Player.UI.Forms
 
         }
 
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                DatabaseService.CreatePlaylist(textBox1.Text);
+                LoadPlaylists();
+            }
+        }
+
+        private void deletePlaylistLbl_MouseEnter(object sender, EventArgs e)
+        {
+            deletePlaylistLbl.Font = new Font(Constants.ProjectFont, 8, FontStyle.Bold | FontStyle.Underline);
+        }
+
+        private void deletePlaylistLbl_MouseLeave(object sender, EventArgs e)
+        {
+            deletePlaylistLbl.Font = new Font(Constants.ProjectFont, 8, FontStyle.Bold);
+        }
+
+        private void deletePlaylistLbl_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void deletePlaylistLbl_Click(object sender, EventArgs e)
+        {
+            DatabaseService.DeletePlaylist(playlistName.Text);
+            LoadPlaylists();
+            //LoadPlaylistSongs();
+            SelectPlaylistPrompt();
+        }
+
+        private void SelectPlaylistPrompt()
+        {
+            playlistName.Text = "Your Playlists";
+            Label tb = new Label()
+            {
+                //Dock = DockStyle.Fill,
+                Font = new Font(Constants.ProjectFont, 10, FontStyle.Bold),
+                ForeColor = ColorTranslator.FromHtml(Constants.DarkBlue2),
+                BackColor = ColorTranslator.FromHtml(Constants.DarkBlue),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BorderStyle = BorderStyle.None,
+                Size = new Size(574, 492),
+                Location = new Point(3, 0),
+                Text = "Choose a Playlist to show!!"
+            };
+
+            songLayoutPanel.Controls.Clear();
+            songLayoutPanel.Controls.Add(tb);
+
+            deletePlaylistLbl.Visible = false;
+        }
     }
 }
