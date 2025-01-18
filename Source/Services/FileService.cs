@@ -103,5 +103,13 @@ namespace Mellow_Music_Player.Source.Services
 
             return null;
         }
+
+        public static string GetReleaseDate(string path)
+        {
+            using (TagLib.File tagFile = TagLib.File.Create(path))
+            {
+                return tagFile.Tag.Year.ToString();
+            }
+        }
     }
 }
