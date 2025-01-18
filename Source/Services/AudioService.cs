@@ -134,5 +134,21 @@ namespace Mellow_Music_Player.Source.Services
             }
             return currentSong;
         }
+
+        public void SkimBack()
+        {
+            if (audioFile == null) return;
+
+            double newPlayBackPos = audioFile.CurrentTime.TotalSeconds - 10;
+            audioFile.CurrentTime = TimeSpan.FromSeconds(Math.Max(newPlayBackPos, 0.0f));
+        }
+
+        public void SkimForward()
+        {
+            if (audioFile == null || currentSong == null) return;
+
+            double newPlayBackPos = audioFile.CurrentTime.TotalSeconds + 10;
+            audioFile.CurrentTime = TimeSpan.FromSeconds(Math.Min(newPlayBackPos, currentSong.Duration.TotalSeconds));
+        }
     }
 }
