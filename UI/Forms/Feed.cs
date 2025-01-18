@@ -158,6 +158,7 @@ namespace Mellow_Music_Player.UI
                 musicPlayerPanel.SetPlaying(true);
                 musicPlayerPanel.UpdatePlayPauseButton();
                 musicPlayerPanel.UpdateHeart();
+                musicPlayerPanel.SetProgressMaximum();
                 audioService.Play(s);
                 LoadLyrics();
             };

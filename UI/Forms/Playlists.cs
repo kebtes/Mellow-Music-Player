@@ -209,9 +209,11 @@ namespace Mellow_Music_Player.UI.Forms
                     MessageBox.Show("Music Player Panel is null");
                 }
 
+                musicPlayerPanel.ClearProgress();
                 musicPlayerPanel.SetPlaying(true);
                 musicPlayerPanel.UpdatePlayPauseButton();
                 musicPlayerPanel.UpdateHeart();
+                musicPlayerPanel.SetProgressMaximum();
                 audioService.Play(s);
             };
 

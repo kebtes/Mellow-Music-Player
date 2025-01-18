@@ -223,7 +223,7 @@ namespace Mellow_Music_Player.UI.Forms
             audioService.SetVolume(volumeTrackBar.Value);
         }
 
-        private void SetProgressMaximum()
+        public void SetProgressMaximum()
         {
             progressBar.Maximum = (int) currentSong.Duration.TotalSeconds;
         }
