@@ -120,4 +120,17 @@
   <metadata name="label1.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="panel1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAALcAAAAZCAYAAABzeL8BAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EAAACxABrSO9dQAAAV9JREFUeF7t3NFtgzAQxnGPwEuFwX0wZoGOxCbNJs5GGYEROkLrM46UKCZVXlrO
+        +p/0UyKZJC+fToeBmGfVdb6z1i/WhWjHsPYufKX338B/Gdx0Sa/RunkpMX2tcqjH8EmYcXCr5LTE9vdK
+        ndrnD9W/DDiiVXJbIlyvN+c/6NbQaEi5lfyWKN+XJJ9gQzMJeLWDp0VGEbRglXPGEusU7DSUVw4CdBrD
+        qUSbro22yHiSu7d1eR+7ehCg17xI146PC4B60fQuyBWf2iKg2Sqdu7YAqCZzN+FGs2Qs4cINmiR73GwD
+        ojn9OF2MHaZzbRFQLrLPjUbNi+m875i70ZQ0apeL7/neklP1IECj95t7S6R7c2KJJtx27WtxPze0y/nd
+        eyKHJ3GgleR290mca0nyGVGgiuR1r2PXSoZyQo4jy1NGyundkzev1LYPPp377f8iqj8C/IUc5q3hRsnl
+        81Ab8wNSEhZuon12gwAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>
