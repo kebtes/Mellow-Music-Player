@@ -211,6 +211,7 @@ namespace Mellow_Music_Player.UI.Forms
 
                 musicPlayerPanel.SetPlaying(true);
                 musicPlayerPanel.UpdatePlayPauseButton();
+                musicPlayerPanel.UpdateHeart();
                 audioService.Play(s);
             };
 
