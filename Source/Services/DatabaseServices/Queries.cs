@@ -54,7 +54,7 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
          Data insertion and modification queries
          */
         public static string AddSong = @"
-                            INSERT INTO Songs (Title, Artist, Album, Genre, Duration, FilePath)
+                            INSERT OR IGNORE INTO Songs (Title, Artist, Album, Genre, Duration, FilePath)
                             VALUES (@title, @artist, @album, @genre, @duration, @filePath);"
         ;
         public static string CreatePlaylist = @"INSERT INTO Playlists (PlaylistName, PlaylistColor, CreatedAt)
@@ -66,11 +66,10 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
         public static string RemoveFromPlaylist = @"DELETE FROM PlaylistSongs
                             WHERE PlaylistID = @playlistID AND SongID = @songID;";
 
-        public static string AddLyrics = @"INSERT INTO SongLyrics(SongID, Lyrics)
+        public static string AddLyrics = @"INSERT OR IGNORE INTO SongLyrics(SongID, Lyrics)
                             VALUES(@songId, @lyrics);";
 
         
-
         //Table deletion queries
         public static string DeleteSongTable = "DELETE FROM Songs";
         public static string DeletePlaylistTable = "DELETE FROM Playlists";
@@ -101,5 +100,9 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
         public static string GetAlbumSongs = @"SELECT Title, Artist, Album, Genre, Duration, FilePath
                             FROM Songs
                             WHERE Album = @albumTitle COLLATE NOCASE;";
+
+
+        public static string ClearPlaylistSongs = @"DELETE FROM PlaylistSongs WHERE PlaylistID = @playlistId";
+        public static string DeletePlaylist = @"DELETE FROM Playlists WHERE PlaylistID = @playlistId";
     }
 }

@@ -508,10 +508,10 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
 
             try
             {
-                using(SQLiteConnection connection = new SQLiteConnection(connectionString))
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
                 {
                     connection.Open();
-                    using (SQLiteCommand cmd  = new SQLiteCommand(Queries.GetLyrics, connection))
+                    using (SQLiteCommand cmd = new SQLiteCommand(Queries.GetLyrics, connection))
                     {
                         cmd.Parameters.AddWithValue("@songId", songId);
                         lyrics = cmd.ExecuteScalar().ToString();
@@ -535,36 +535,107 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
         {
             var albumSongs = new List<Song>();
 
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
-            {
-                connection.Open();
-                using (SQLiteCommand cmd = new SQLiteCommand(Queries.GetAlbumSongs, connection))
+            try 
+            { 
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@albumTitle", albumTitle);
-
-                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    connection.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(Queries.GetAlbumSongs, connection))
                     {
-                        while (reader.Read())
+                        cmd.Parameters.AddWithValue("@albumTitle", albumTitle);
+
+                        using (SQLiteDataReader reader = cmd.ExecuteReader())
                         {
-                            string filePath = reader.GetString(5);
-                            Song song = new Song();
+                            while (reader.Read())
+                            {
+                                string filePath = reader.GetString(5);
+                                Song song = new Song();
 
-                            song.Title = reader.GetString(0);
-                            song.Artists = reader.GetString(1).Split(' ');
-                            song.Album = reader.GetString(2);
-                            song.Genres = reader.GetString(3).Split(' ');
-                            song.Duration = TimeSpan.FromSeconds(reader.GetDouble(4));
+                                song.Title = reader.GetString(0);
+                                song.Artists = reader.GetString(1).Split(' ');
+                                song.Album = reader.GetString(2);
+                                song.Genres = reader.GetString(3).Split(' ');
+                                song.Duration = TimeSpan.FromSeconds(reader.GetDouble(4));
 
-                            song.FilePath = filePath;
-                            song.AlbumArt = FileService.GetAlbumArt(filePath);
+                                song.FilePath = filePath;
+                                song.AlbumArt = FileService.GetAlbumArt(filePath);
 
-                            albumSongs.Add(song);
+                                albumSongs.Add(song);
+                            }
                         }
                     }
                 }
             }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
 
             return albumSongs;
+        }
+
+        public static void CreatePlaylist(string playlistName)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SQLiteCommand cmd = new SQLiteCommand(Queries.CreatePlaylist, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@playlistName", playlistName);
+                        cmd.Parameters.AddWithValue("@playlistColor", "#000000");
+                        cmd.Parameters.AddWithValue("@currentTimeStamp", DateTime.Now);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+        }
+
+        public static void DeletePlaylist(string playlistName)
+        {
+            int playlistId = GetPlaylistId(playlistName);
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+                    using(SQLiteCommand cmd = new SQLiteCommand(Queries.ClearPlaylistSongs, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@playlistId", playlistId);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using(SQLiteCommand cmd = new SQLiteCommand(Queries.DeletePlaylist, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@playlistId", playlistId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 
