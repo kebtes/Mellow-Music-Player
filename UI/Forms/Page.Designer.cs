@@ -34,6 +34,7 @@
             this.albumArtistLbl = new System.Windows.Forms.Label();
             this.songCardLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.albumSize = new System.Windows.Forms.Label();
+            this.releaseDate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // line
@@ -54,22 +55,22 @@
             // albumTitleLabel
             // 
             this.albumTitleLabel.AutoSize = true;
-            this.albumTitleLabel.Font = new System.Drawing.Font("Geist", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.albumTitleLabel.Font = new System.Drawing.Font("Geist", 15F, System.Drawing.FontStyle.Bold);
             this.albumTitleLabel.ForeColor = System.Drawing.Color.White;
-            this.albumTitleLabel.Location = new System.Drawing.Point(174, 89);
+            this.albumTitleLabel.Location = new System.Drawing.Point(172, 65);
             this.albumTitleLabel.Name = "albumTitleLabel";
-            this.albumTitleLabel.Size = new System.Drawing.Size(103, 21);
+            this.albumTitleLabel.Size = new System.Drawing.Size(153, 32);
             this.albumTitleLabel.TabIndex = 6;
             this.albumTitleLabel.Text = "Album Title";
             // 
             // albumArtistLbl
             // 
             this.albumArtistLbl.AutoSize = true;
-            this.albumArtistLbl.Font = new System.Drawing.Font("Geist", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.albumArtistLbl.ForeColor = System.Drawing.Color.DarkGray;
-            this.albumArtistLbl.Location = new System.Drawing.Point(175, 110);
+            this.albumArtistLbl.Font = new System.Drawing.Font("Geist", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.albumArtistLbl.ForeColor = System.Drawing.Color.White;
+            this.albumArtistLbl.Location = new System.Drawing.Point(175, 94);
             this.albumArtistLbl.Name = "albumArtistLbl";
-            this.albumArtistLbl.Size = new System.Drawing.Size(82, 15);
+            this.albumArtistLbl.Size = new System.Drawing.Size(95, 18);
             this.albumArtistLbl.TabIndex = 7;
             this.albumArtistLbl.Text = "Album Artist";
             // 
@@ -92,12 +93,26 @@
             this.albumSize.Text = "20 Songs";
             this.albumSize.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // releaseDate
+            // 
+            this.releaseDate.Font = new System.Drawing.Font("Geist", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.releaseDate.ForeColor = System.Drawing.Color.DarkGray;
+            this.releaseDate.Location = new System.Drawing.Point(175, 112);
+            this.releaseDate.Margin = new System.Windows.Forms.Padding(0);
+            this.releaseDate.Name = "releaseDate";
+            this.releaseDate.Size = new System.Drawing.Size(164, 15);
+            this.releaseDate.TabIndex = 10;
+            this.releaseDate.Text = "Released on";
+            this.releaseDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.releaseDate.Click += new System.EventHandler(this.label1_Click);
+            // 
             // Page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
             this.ClientSize = new System.Drawing.Size(876, 694);
+            this.Controls.Add(this.releaseDate);
             this.Controls.Add(this.albumSize);
             this.Controls.Add(this.songCardLayout);
             this.Controls.Add(this.albumArtistLbl);
@@ -119,5 +134,6 @@
         private System.Windows.Forms.Label albumArtistLbl;
         private System.Windows.Forms.FlowLayoutPanel songCardLayout;
         private System.Windows.Forms.Label albumSize;
+        private System.Windows.Forms.Label releaseDate;
     }
 }

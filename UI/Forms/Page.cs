@@ -43,6 +43,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.albumTitleLabel.Text = album.AlbumName;
             this.albumArtistLbl.Text = album.Artists;
             this.albumSize.Text = $"{album.Songs.Count} Songs";
+            this.releaseDate.Text = $"Released on {FileService.GetReleaseDate(album.Songs[0].FilePath)}";
 
             this.album.Songs.ForEach(s =>
             {
@@ -168,6 +169,7 @@ namespace Mellow_Music_Player.UI.Forms
                 musicPlayerPanel.ClearProgress();
                 musicPlayerPanel.SetPlaying(true);
                 musicPlayerPanel.UpdatePlayPauseButton();
+                musicPlayerPanel.UpdateHeart();
                 audioService.Play(s);
                 feed.LoadLyrics();
             };
@@ -267,6 +269,11 @@ namespace Mellow_Music_Player.UI.Forms
             panelSongCard.Controls.Add(lblAlbum);
 
             parentComponent.Controls.Add(panelSongCard);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
