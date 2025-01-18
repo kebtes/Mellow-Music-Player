@@ -43,6 +43,8 @@ namespace Mellow_Music_Player.UI.Forms
             this.currentTime = new System.Windows.Forms.Label();
             this.totalTime = new System.Windows.Forms.Label();
             this.heartButton = new System.Windows.Forms.Button();
+            this.forBtn = new System.Windows.Forms.Button();
+            this.prevBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // albumArtPanel
@@ -88,7 +90,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.playPauseButton.FlatAppearance.BorderSize = 0;
             this.playPauseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.playPauseButton.Image = ((System.Drawing.Image)(resources.GetObject("playPauseButton.Image")));
-            this.playPauseButton.Location = new System.Drawing.Point(520, 34);
+            this.playPauseButton.Location = new System.Drawing.Point(515, 33);
             this.playPauseButton.Name = "playPauseButton";
             this.playPauseButton.Size = new System.Drawing.Size(34, 34);
             this.playPauseButton.TabIndex = 4;
@@ -104,7 +106,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.nextButton.FlatAppearance.BorderSize = 0;
             this.nextButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nextButton.Image = ((System.Drawing.Image)(resources.GetObject("nextButton.Image")));
-            this.nextButton.Location = new System.Drawing.Point(577, 41);
+            this.nextButton.Location = new System.Drawing.Point(561, 41);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(20, 20);
             this.nextButton.TabIndex = 5;
@@ -120,7 +122,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.prevButton.FlatAppearance.BorderSize = 0;
             this.prevButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.prevButton.Image = ((System.Drawing.Image)(resources.GetObject("prevButton.Image")));
-            this.prevButton.Location = new System.Drawing.Point(477, 41);
+            this.prevButton.Location = new System.Drawing.Point(480, 41);
             this.prevButton.Name = "prevButton";
             this.prevButton.Size = new System.Drawing.Size(20, 20);
             this.prevButton.TabIndex = 6;
@@ -228,12 +230,46 @@ namespace Mellow_Music_Player.UI.Forms
             this.heartButton.UseVisualStyleBackColor = false;
             this.heartButton.Click += new System.EventHandler(this.heartButton_Click);
             // 
+            // forBtn
+            // 
+            this.forBtn.BackColor = System.Drawing.Color.Transparent;
+            this.forBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("forBtn.BackgroundImage")));
+            this.forBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.forBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.forBtn.FlatAppearance.BorderSize = 0;
+            this.forBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.forBtn.Location = new System.Drawing.Point(600, 44);
+            this.forBtn.Name = "forBtn";
+            this.forBtn.Size = new System.Drawing.Size(15, 15);
+            this.forBtn.TabIndex = 16;
+            this.forBtn.UseVisualStyleBackColor = false;
+            this.forBtn.Click += new System.EventHandler(this.forBtn_Click);
+            this.forBtn.MouseEnter += new System.EventHandler(this.timeSkimmer_MouseEnter);
+            // 
+            // prevBtn
+            // 
+            this.prevBtn.BackColor = System.Drawing.Color.Transparent;
+            this.prevBtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("prevBtn.BackgroundImage")));
+            this.prevBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.prevBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.prevBtn.FlatAppearance.BorderSize = 0;
+            this.prevBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.prevBtn.Location = new System.Drawing.Point(440, 44);
+            this.prevBtn.Name = "prevBtn";
+            this.prevBtn.Size = new System.Drawing.Size(15, 15);
+            this.prevBtn.TabIndex = 17;
+            this.prevBtn.UseVisualStyleBackColor = false;
+            this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
+            this.prevBtn.MouseEnter += new System.EventHandler(this.timeSkimmer_MouseEnter);
+            // 
             // MusicPlayerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(27)))), ((int)(((byte)(34)))));
             this.ClientSize = new System.Drawing.Size(1082, 83);
+            this.Controls.Add(this.prevBtn);
+            this.Controls.Add(this.forBtn);
             this.Controls.Add(this.heartButton);
             this.Controls.Add(this.totalTime);
             this.Controls.Add(this.currentTime);
@@ -268,5 +304,7 @@ namespace Mellow_Music_Player.UI.Forms
         private Label totalTime;
         private ReaLTaiizor.Controls.RibbonProgressBarCenter progressBar;
         private Button heartButton;
+        private Button forBtn;
+        private Button prevBtn;
     }
 }

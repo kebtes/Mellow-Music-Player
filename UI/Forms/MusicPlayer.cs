@@ -37,6 +37,13 @@ namespace Mellow_Music_Player.UI.Forms
             timer.Start();
         }
 
+        private void UpdateSongCurrentTime(double increment)
+        {
+            if (isPlaying)
+            {
+                songCurrentTime += TimeSpan.FromSeconds(increment);
+            }
+        }
 
         public MusicPlayerPanel(AudioService audioService, panelFeed panelFeed)
         {
@@ -90,6 +97,11 @@ namespace Mellow_Music_Player.UI.Forms
                     }
                 };
 
+                this.heartButton.MouseEnter += (s, e) =>
+                {
+                    this.heartButton.BackColor = ColorTranslator.FromHtml(Constants.DarkBlue2);
+                };
+
                 this.totalTime.DataBindings.Add(totalTimeBinding);
                 UpdateHeart();
             }
@@ -105,6 +117,7 @@ namespace Mellow_Music_Player.UI.Forms
             InitializeTimer();
         }
 
+    
         private void UpdateHeart()
         {
             bool likedSong = DatabaseService.IsSongInPlaylist("Liked Songs", currentSong);
@@ -179,7 +192,7 @@ namespace Mellow_Music_Player.UI.Forms
         {
             if (isPlaying)
             {
-                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PauseButtonSelectedIcon), 21, 21);
+                playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PlayButtonSelectedIcon), 21, 21);
             }
             else
             {
@@ -305,6 +318,28 @@ namespace Mellow_Music_Player.UI.Forms
             {
                 playPauseButton.Image = ScaleImage.Scale(Image.FromFile(Constants.PauseButtonIcon), 21, 21);
             }
+        }
+
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            audioService.SkimBack();
+            progressBar.Value -= 10;
+            UpdateSongCurrentTime(-10);
+            UpdateCurrentTimeLabel();
+        }
+
+        private void forBtn_Click(object sender, EventArgs e)
+        {
+            progressBar.Value += 10;
+            audioService.SkimForward();
+            UpdateSongCurrentTime(10);
+            UpdateCurrentTimeLabel();
+        }
+
+        private void timeSkimmer_MouseEnter(Object sender, EventArgs e)
+        {
+            forBtn.BackColor = ColorTranslator.FromHtml(Constants.DarkBlue2);
+            prevBtn.BackColor = ColorTranslator.FromHtml(Constants.DarkBlue2);
         }
     }
 }
