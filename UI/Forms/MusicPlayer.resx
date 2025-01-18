@@ -157,6 +157,15 @@
         AcrgRRE54/MAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="heartButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABUAAAASCAYAAAC0EpUuAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAMRJREFUOE+tlAENgzAQRSuhEiYBCUiZhEmYEyRMAhImYRImody//msYK22BvuQH
+        jrt7CaHBrQkheMlDMjF3thK5GcmN7V/QkHwkW/BMl3BlvSXNJPCAjT1mzr1imQX7XoVACrxGjTevJZ5U
+        qrQXX4mHcNSyHwOkQ7zvxggpjkhP4seSmznWl5lUCKSoHakWTp3VEv9CAw0OHGFfaGCAgy3UhQYGuVCi
+        XWhggYs5jgsNLFKw5rzQgIAicF1oQCTBb69B6NwCujz5MR7vIJ8AAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="forBtn.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL

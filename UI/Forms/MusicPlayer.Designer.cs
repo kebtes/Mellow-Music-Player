@@ -62,12 +62,12 @@ namespace Mellow_Music_Player.UI.Forms
             // 
             this.musicTitleLabel.AutoEllipsis = true;
             this.musicTitleLabel.AutoSize = true;
-            this.musicTitleLabel.Font = new System.Drawing.Font("Geist", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.musicTitleLabel.Font = new System.Drawing.Font("Geist", 8F, System.Drawing.FontStyle.Bold);
             this.musicTitleLabel.ForeColor = System.Drawing.Color.White;
             this.musicTitleLabel.Location = new System.Drawing.Point(81, 25);
             this.musicTitleLabel.Margin = new System.Windows.Forms.Padding(0);
             this.musicTitleLabel.Name = "musicTitleLabel";
-            this.musicTitleLabel.Size = new System.Drawing.Size(99, 19);
+            this.musicTitleLabel.Size = new System.Drawing.Size(93, 18);
             this.musicTitleLabel.TabIndex = 1;
             this.musicTitleLabel.Text = "Music Name";
             this.musicTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -77,7 +77,7 @@ namespace Mellow_Music_Player.UI.Forms
             this.artistNameLabel.AutoSize = true;
             this.artistNameLabel.Font = new System.Drawing.Font("Geist", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.artistNameLabel.ForeColor = System.Drawing.Color.White;
-            this.artistNameLabel.Location = new System.Drawing.Point(82, 48);
+            this.artistNameLabel.Location = new System.Drawing.Point(81, 43);
             this.artistNameLabel.Name = "artistNameLabel";
             this.artistNameLabel.Size = new System.Drawing.Size(86, 15);
             this.artistNameLabel.TabIndex = 2;
@@ -223,7 +223,8 @@ namespace Mellow_Music_Player.UI.Forms
             this.heartButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.heartButton.FlatAppearance.BorderSize = 0;
             this.heartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.heartButton.Location = new System.Drawing.Point(246, 34);
+            this.heartButton.Image = ((System.Drawing.Image)(resources.GetObject("heartButton.Image")));
+            this.heartButton.Location = new System.Drawing.Point(280, 33);
             this.heartButton.Name = "heartButton";
             this.heartButton.Size = new System.Drawing.Size(23, 23);
             this.heartButton.TabIndex = 15;

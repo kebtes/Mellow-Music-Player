@@ -118,18 +118,12 @@ namespace Mellow_Music_Player.UI.Forms
         }
 
     
-        private void UpdateHeart()
+        public void UpdateHeart()
         {
             bool likedSong = DatabaseService.IsSongInPlaylist("Liked Songs", currentSong);
 
-            if (likedSong)
-            {
-                heartButton.Image = Image.FromFile(Constants.HeartIconSelected);
-            }
-            else
-            {
-                heartButton.Image = Image.FromFile(Constants.HeartIcon);
-            }
+            if (likedSong) heartButton.Image = Image.FromFile(Constants.HeartIconSelected);
+            else heartButton.Image = Image.FromFile(Constants.HeartIcon);
         }
 
         private void nextButton_Click(object sender, EventArgs e)
