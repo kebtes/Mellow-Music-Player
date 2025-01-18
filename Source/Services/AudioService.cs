@@ -21,8 +21,6 @@ namespace Mellow_Music_Player.Source.Services
         {
             try
             {
-                //currentSong = songQueue.GetCurrentSong();
-
                 if (currentSong == null) currentSong = songQueue.GetCurrentSong();
 
                 Stop();
@@ -78,8 +76,6 @@ namespace Mellow_Music_Player.Source.Services
                 };
 
                 playBackPosition = TimeSpan.Zero;
-
-                //MessageBox.Show(currentSong.FilePath);
 
                 waveOut.Init(audioFile);
                 waveOut.Play();
