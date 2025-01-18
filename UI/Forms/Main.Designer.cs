@@ -159,7 +159,6 @@ namespace Mellow_Music_Player.UI
 
         public void LoadPage(Form page)
         {
-            MessageBox.Show("LoadPage");
             panelRight.Controls.Clear();
 
             page.TopLevel = false;
