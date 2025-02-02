@@ -118,16 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonRefresh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAOdJREFUOE/NkmERgzAMhZGABCRMAhJwMAs4YA6Yk80BEpAwCUhg3+MeO7i2lOPX
-        vrt3NE2TJqTFEfM831Fl8zokeaDPfyQjsEY9eiGhZKXd5yBACSakatp1bfc5COjQiEpUIVWySyKfl3E2
-        gcv/4Ku2gkrYU4W1zRCcT9TaTKLkOmszBOeA0jcZzjTobTMEp1ppbCbRZWiwGYJTrWWnwxlN8rA13TTZ
-        /MGeJtl7vRtIEg7sRoutJEugfEhP49Kb0qjVyrpOtxSDAN2uSoSGoP+XnWgUAtf/0XnrOptk2Yeaxclu
-        NiMUxRdmGSUwJueJvwAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="buttonDirectory.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABEAAAASCAYAAAC9+TVUAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL

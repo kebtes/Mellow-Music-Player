@@ -115,6 +115,7 @@ namespace Mellow_Music_Player.UI.Forms
             }
 
             InitializeTimer();
+            this.volumeTrackBar.Value = (int)(Settings.Volume * 100);
         }
 
     

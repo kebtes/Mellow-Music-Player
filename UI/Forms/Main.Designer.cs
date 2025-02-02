@@ -32,12 +32,12 @@ namespace Mellow_Music_Player.UI
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panelLeftSide = new System.Windows.Forms.Panel();
+            this.MellowIcon = new System.Windows.Forms.Button();
             this.panelPage = new System.Windows.Forms.Panel();
             this.buttonPlaylist = new System.Windows.Forms.Button();
             this.buttonFeed = new System.Windows.Forms.Button();
             this.pannelFooter = new System.Windows.Forms.Panel();
             this.panelRight = new System.Windows.Forms.Panel();
-            this.MellowIcon = new System.Windows.Forms.Button();
             this.panelLeftSide.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +53,19 @@ namespace Mellow_Music_Player.UI
             this.panelLeftSide.Name = "panelLeftSide";
             this.panelLeftSide.Size = new System.Drawing.Size(152, 717);
             this.panelLeftSide.TabIndex = 0;
+            // 
+            // MellowIcon
+            // 
+            this.MellowIcon.BackColor = System.Drawing.Color.Transparent;
+            this.MellowIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.MellowIcon.FlatAppearance.BorderSize = 0;
+            this.MellowIcon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MellowIcon.Image = ((System.Drawing.Image)(resources.GetObject("MellowIcon.Image")));
+            this.MellowIcon.Location = new System.Drawing.Point(39, 25);
+            this.MellowIcon.Name = "MellowIcon";
+            this.MellowIcon.Size = new System.Drawing.Size(73, 53);
+            this.MellowIcon.TabIndex = 3;
+            this.MellowIcon.UseVisualStyleBackColor = false;
             // 
             // panelPage
             // 
@@ -127,19 +140,6 @@ namespace Mellow_Music_Player.UI
             this.panelRight.Size = new System.Drawing.Size(934, 693);
             this.panelRight.TabIndex = 2;
             // 
-            // MellowIcon
-            // 
-            this.MellowIcon.BackColor = System.Drawing.Color.Transparent;
-            this.MellowIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.MellowIcon.FlatAppearance.BorderSize = 0;
-            this.MellowIcon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MellowIcon.Image = ((System.Drawing.Image)(resources.GetObject("MellowIcon.Image")));
-            this.MellowIcon.Location = new System.Drawing.Point(39, 25);
-            this.MellowIcon.Name = "MellowIcon";
-            this.MellowIcon.Size = new System.Drawing.Size(73, 53);
-            this.MellowIcon.TabIndex = 3;
-            this.MellowIcon.UseVisualStyleBackColor = false;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -152,6 +152,7 @@ namespace Mellow_Music_Player.UI
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "Mellow Music Player";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.panelLeftSide.ResumeLayout(false);
             this.ResumeLayout(false);
 

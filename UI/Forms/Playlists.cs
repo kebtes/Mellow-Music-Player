@@ -23,10 +23,12 @@ namespace Mellow_Music_Player.UI.Forms
             this.DoubleBuffered = true;
             this.musicPlayerPanel = musicPlayerPanel;
 
-            string lastPlayedPlaylist = Settings.LastOpenedPlaylist;
+            //string lastPlayedPlaylist = Settings.LastOpenedPlaylist;
 
-            if (lastPlayedPlaylist != null) { 
-            }
+            //if (lastPlayedPlaylist != null) { 
+            //}
+            //LoadPlaylistSongs(new Playlist { PlaylistName = Settings.LastOpenedPlaylist });
+
             InitializeComponent();
             LoadPlaylists();
         }
@@ -80,8 +82,6 @@ namespace Mellow_Music_Player.UI.Forms
                 {
                     selectedPlaylistLabel.Font = new Font(Constants.ProjectFont, 8, FontStyle.Bold);
                     selectedPlaylistLabel.ForeColor = ColorTranslator.FromHtml(unselColor);
-
-                
                 }
                 playlistName.Text = playlist.PlaylistName;
                 selectedPlaylistName = playlist;
@@ -114,6 +114,8 @@ namespace Mellow_Music_Player.UI.Forms
                     CreateSongCard(song, songLayoutPanel);
                 }
             }
+
+            //Settings.LastOpenedPlaylist = playlist.PlaylistName;
         }
 
         private void PlaylistEmpty()

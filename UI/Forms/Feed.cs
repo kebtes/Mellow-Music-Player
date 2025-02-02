@@ -295,7 +295,7 @@ namespace Mellow_Music_Player.UI
             //Panel selectedCard = null;
             flowLayoutPanel.Controls.Clear();
 
-            DatabaseService.GetSongs().ForEach(s =>
+            DatabaseService.GetSongs(Settings.SongsDirectory).ForEach(s =>
             {
                 CreateSongCard(s, flowLayoutPanel);
             });
@@ -513,6 +513,11 @@ namespace Mellow_Music_Player.UI
                     LoadLyrics();
                 }
             }
+        }
+
+        private void panelFeed_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Save();
         }
     }
 }

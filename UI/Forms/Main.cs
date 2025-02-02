@@ -184,5 +184,10 @@ namespace Mellow_Music_Player.UI
             }
         }
 
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MessageBox.Show("YES");
+            Settings.Save();
+        }
     }
 }

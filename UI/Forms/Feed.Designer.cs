@@ -35,7 +35,6 @@ namespace Mellow_Music_Player.UI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(panelFeed));
             this.labelMusic = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             this.buttonDirectory = new System.Windows.Forms.Button();
             this.searchBoxImage = new System.Windows.Forms.Panel();
             this.searchBoxTextArea = new System.Windows.Forms.TextBox();
@@ -69,25 +68,13 @@ namespace Mellow_Music_Player.UI
             this.panel1.Size = new System.Drawing.Size(950, 2);
             this.panel1.TabIndex = 1;
             // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.BackColor = System.Drawing.Color.Transparent;
-            this.buttonRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRefresh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(14)))), ((int)(((byte)(21)))));
-            this.buttonRefresh.Image = ((System.Drawing.Image)(resources.GetObject("buttonRefresh.Image")));
-            this.buttonRefresh.Location = new System.Drawing.Point(554, 118);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(27, 23);
-            this.buttonRefresh.TabIndex = 2;
-            this.buttonRefresh.UseVisualStyleBackColor = false;
-            // 
             // buttonDirectory
             // 
             this.buttonDirectory.FlatAppearance.BorderSize = 0;
             this.buttonDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDirectory.ForeColor = System.Drawing.Color.White;
             this.buttonDirectory.Image = ((System.Drawing.Image)(resources.GetObject("buttonDirectory.Image")));
-            this.buttonDirectory.Location = new System.Drawing.Point(521, 118);
+            this.buttonDirectory.Location = new System.Drawing.Point(559, 117);
             this.buttonDirectory.Name = "buttonDirectory";
             this.buttonDirectory.Size = new System.Drawing.Size(27, 23);
             this.buttonDirectory.TabIndex = 3;
@@ -187,7 +174,6 @@ namespace Mellow_Music_Player.UI
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.searchBoxImage);
             this.Controls.Add(this.buttonDirectory);
-            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.labelMusic);
             this.DoubleBuffered = true;
@@ -206,7 +192,6 @@ namespace Mellow_Music_Player.UI
 
         private System.Windows.Forms.Label labelMusic;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.Button buttonDirectory;
         private System.Windows.Forms.Panel searchBoxImage;
         private System.Windows.Forms.TextBox searchBoxTextArea;
