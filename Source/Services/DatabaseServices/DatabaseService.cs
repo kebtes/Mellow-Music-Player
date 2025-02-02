@@ -175,6 +175,53 @@ namespace Mellow_Music_Player.Source.Services.Database_Services
             return songs;
         }
 
+        public static List<Song> GetSongs(string directory)
+        {
+            List<Song> songs = new List<Song>();
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SQLiteCommand cmd = new SQLiteCommand(Queries.GetSongs, connection))
+                    {
+                        using (SQLiteDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string filePath = reader.GetString(5);
+                                Song song = new Song();
+
+                                song.Title = reader.GetString(0);
+                                song.Artists = reader.GetString(1).Split(' ');
+                                song.Album = reader.GetString(2);
+                                song.Genres = reader.GetString(3).Split(' ');
+                                song.Duration = TimeSpan.FromSeconds(reader.GetDouble(4));
+
+                                song.FilePath = filePath;
+                                song.AlbumArt = FileService.GetAlbumArt(filePath);
+
+                                if (song.FilePath.StartsWith(directory)) songs.Add(song);
+                                //songs.Add(song);
+                            }
+                        }
+                    }
+                }
+            }
+
+            catch (SQLiteException ex)
+            {
+                {
+                    Debug.WriteLine($"Error fetching songs from database {ex.Message}");
+                }
+
+            }
+
+            return songs;
+        }
+
         public static bool SongExists(Song song)
         {
             string filePath = song.FilePath;
