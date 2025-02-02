@@ -119,7 +119,9 @@ namespace Mellow_Music_Player.Source.Services
             newVolume = Math.Min(1.0f, Math.Max(0.0f, newVolume));
             volume = newVolume;
 
-            audioFile.Volume = volume;
+            Settings.Volume = newVolume;
+
+            if (audioFile != null) audioFile.Volume = volume;
         }
 
         public Song GetCurrentSong()
