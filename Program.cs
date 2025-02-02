@@ -20,9 +20,10 @@ namespace Mellow_Music_Player
             if (Environment.OSVersion.Version.Major >= 6)
                 SetProcessDPIAware();
 
+            Settings.Load();
             DatabaseService.InitializeDatabase();
             FileService.Refresh();
-               
+              
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
